@@ -8,8 +8,8 @@ export const metadata = {
   },
 };
 
-export const RootLayout = ({ children }: { children: ReactNode}) => (
-  <LayoutRoot>{children}</LayoutRoot>
-);
-
-export default RootLayout;
+export default function RootLayout({ children }: { children: ReactNode}) {
+  return (
+    <LayoutRoot>{children}</LayoutRoot>
+  );
+};

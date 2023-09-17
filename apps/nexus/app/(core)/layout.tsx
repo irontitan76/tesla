@@ -1,12 +1,11 @@
-
+import { createServerSupabaseClient } from 'database/serverClient';
+import { redirect } from 'next/navigation';
 import {
   faArrowProgress,
   faBatteryBolt,
   faGaugeSimple,
   faIndustry,
 } from '@fortawesome/sharp-light-svg-icons';
-import { createServerSupabaseClient } from 'database/serverClient';
-import { redirect } from 'next/navigation';
 import { Layout } from 'components/Layout';
 import { ReactNode } from 'react';
 

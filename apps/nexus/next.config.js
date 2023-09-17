@@ -12,9 +12,6 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: true,
   },
-  // typescript: {
-  //   ignoreBuildErrors: true, // TODO: figure out this error: https://github.com/vercel/next.js/discussions/48724
-  // },
 };
 
 const plugins = [

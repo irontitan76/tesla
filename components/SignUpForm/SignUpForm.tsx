@@ -40,8 +40,6 @@ export const SignUpForm = () => {
       },
     });
 
-    console.log(data);
-
     if (!error) {
       router.refresh();
     } else {
