@@ -9,9 +9,12 @@ import {
   ToolbarProps,
   Typography,
 } from '@mui/material';
+import { User } from '@supabase/supabase-js';
+import { Avatar } from 'components/Avatar';
 import { Logo } from 'components/Logo';
-import { ThemeSelector } from 'components/ThemeSelector';
-import React from 'react';
+import { supabase } from 'database/client';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 export interface LayoutTopProps extends AppBarProps {
   LogoProps?: SVGElement;
@@ -26,6 +29,25 @@ export const LayoutTop = ({
   sx,
   ...rest
 }: LayoutTopProps) => {
+  const router = useRouter();
+  const [user, setUser] = useState<User>();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data } = await supabase.auth.getUser();
+
+        if (data?.user) {
+          setUser(data.user);
+        }
+      };
+
+      fetchUser();
+    }, []);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.refresh();
+  };
 
   return (
     <AppBar
@@ -74,7 +96,10 @@ export const LayoutTop = ({
               </Typography>
           </Grid>
           <Grid item>
-            <ThemeSelector />
+            <Avatar
+              onSignOut={handleSignOut}
+              user={user}
+            />
           </Grid>
         </Grid>
       </Toolbar>

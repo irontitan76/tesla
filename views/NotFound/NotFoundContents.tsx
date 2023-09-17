@@ -46,7 +46,7 @@ export const NotFoundContents = () => {
         </Typography>
       </Grid>
       <Grid item>
-        <Link href='/enter'>
+        <Link href='/'>
           <Button
             fullWidth
             sx={{
@@ -56,7 +56,7 @@ export const NotFoundContents = () => {
               }
             }}
           >
-            Go to Entry
+            Go Home
           </Button>
         </Link>
       </Grid>

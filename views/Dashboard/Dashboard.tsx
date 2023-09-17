@@ -5,7 +5,7 @@ export const metadata = {
   title: 'Dashboard',
 };
 
-export const Dashboard = () => {
+export const Dashboard = async () => {
   return (
     <DashboardPanels />
   );

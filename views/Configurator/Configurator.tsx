@@ -1,5 +1,5 @@
-import { ConfiguratorContent } from './ConfiguratorContent';
 import React from 'react';
+import { ConfiguratorContent } from './ConfiguratorContent';
 
 export const metadata = {
   title: 'Configurator',

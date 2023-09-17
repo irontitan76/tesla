@@ -146,7 +146,7 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
             >
               New
             </MenuItem>
-            {configurations?.map((config) => (
+            {configurations?.sort((a, b) => a.id - b.id).map((config) => (
               <MenuItem
                 key={config.id}
                 value={config.id}
