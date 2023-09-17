@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, Grid, Link, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export const NotFoundContents = () => {
   const setVanta = () => {
@@ -38,6 +38,7 @@ export const NotFoundContents = () => {
     >
       <Grid item>
         <Typography
+          color='common.white'
           fontWeight='bold'
           mb={2}
           variant='h1'
@@ -50,9 +51,9 @@ export const NotFoundContents = () => {
           <Button
             fullWidth
             sx={{
-              bgcolor: 'background.paper',
+              bgcolor: 'grey.700',
               '&:hover': {
-                bgcolor: 'background.default',
+                bgcolor: 'grey.900',
               }
             }}
           >

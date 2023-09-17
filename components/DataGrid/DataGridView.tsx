@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import React from 'react';
 import { DataGrid, DataGridProps } from './DataGrid';
 import { DataGridToolbar, DataGridToolbarProps } from './DataGridToolbar';
 

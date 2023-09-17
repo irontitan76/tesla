@@ -1,7 +1,7 @@
 'use client';
 
 import { Grid, MenuItem, Stack, TextField, TextFieldProps, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Configuration, Device } from 'database/objects';
 import { supabase } from 'database/client';
 import { ConfiguratorLayout } from './ConfiguratorLayout';

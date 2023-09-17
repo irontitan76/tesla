@@ -25,7 +25,7 @@ import {
 import { User } from '@supabase/supabase-js';
 import { Icon } from 'components/Icon';
 import { useColorMode } from 'components/ThemeRegistry';
-import React, { MouseEvent, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 
 const getGreetingByTimezone = () => {
   const userTimeZoneOffset = new Date().getTimezoneOffset(); // in minutes
@@ -99,11 +99,23 @@ export const Avatar = ({
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        border: '2px solid',
+        borderColor: 'transparent',
+        p: 0.9,
+        '&:hover': {
+          borderColor: 'secondary.main',
+          borderRadius: '50%',
+        }
+      }}
+    >
       <MuiAvatar
         onClick={anchorEl ? handleClose : handleAvatarClick}
         sx={{
           cursor: 'pointer',
+          height: 21,
+          width: 21,
         }}
         {...rest}
       >
@@ -207,7 +219,7 @@ export const Avatar = ({
             </ClickAwayListener>
           )}
         </Popper>
-    </>
+    </Box>
   );
 };
 

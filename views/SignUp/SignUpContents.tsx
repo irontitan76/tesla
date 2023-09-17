@@ -3,7 +3,7 @@
 import { Box, Grid } from '@mui/material';
 import { SignUpForm } from 'components/SignUpForm';
 import { ThemeSelector } from 'components/ThemeSelector';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export const SignUpContents = () => {
   const setVanta = () => {

@@ -1,9 +1,5 @@
 import { Device } from "database/objects";
 
-export const getSizeString = (obj: { depth: number, width: number }) => {
-  return `${obj.width}ft x ${obj.depth}ft`;
-};
-
 export const calculateTotal = (items: number[], batteries: Device[]) => {
   return items.reduce((acc: any, cur: any, index) => {
     const battery = batteries.find((item) => item.id === cur);

@@ -1,6 +1,5 @@
 import { createServerSupabaseClient } from 'database/serverClient';import { Database } from 'database/types';
 import { redirect } from 'next/navigation';
-import React from 'react';
 import { SignUpContents } from './SignUpContents';
 
 export const metadata = {

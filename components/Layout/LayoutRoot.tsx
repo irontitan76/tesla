@@ -1,7 +1,8 @@
 import 'assets/fonts/gotham_ssa/stylesheet.css';
 
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { ThemeRegistry } from 'components/ThemeRegistry';
+import Script from 'next/script';
 
 export interface LayoutSplashProps {
   children?: ReactNode;
@@ -12,16 +13,16 @@ export const LayoutRoot = ({
 }: LayoutSplashProps) => {
   return (
     <html lang='en'>
-      <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.trunk.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"></script>
-      </head>
       <body>
         <ThemeRegistry>
           {children}
         </ThemeRegistry>
+
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" />
+        <Script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js' />
+        <Script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js" />
+        <Script src='https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js' />
+        <Script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.trunk.min.js" />
       </body>
     </html>
   );

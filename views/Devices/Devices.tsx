@@ -1,5 +1,4 @@
 import { DevicesContent } from './DevicesContent';
-import React from 'react';
 
 export const metadata = {
   title: 'Devices',

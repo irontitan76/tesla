@@ -1,6 +1,6 @@
 import { Components } from '@mui/material';
 import NextLink, { LinkProps } from 'next/link';
-import React, { forwardRef, Ref } from 'react';
+import { forwardRef, Ref } from 'react';
 import { palette, secondary } from './palette';
 
 export const LinkBehavior = forwardRef((props: LinkProps, ref: Ref<HTMLAnchorElement> | undefined) => {

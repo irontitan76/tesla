@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { Icon, IconProps } from 'components/Icon';
 import { usePathname } from 'next/navigation';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 export interface LayoutSideItemProps extends ListItemProps {
   children?: ReactNode;

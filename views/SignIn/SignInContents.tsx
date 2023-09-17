@@ -1,14 +1,15 @@
 'use client';
 
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, useTheme } from '@mui/material';
 import { SignInForm } from 'components/SignInForm';
 import { ThemeSelector } from 'components/ThemeSelector';
-import React, { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 declare global {
   interface Window {
     VANTA: {
       CELLS: any;
+      NET: any;
       TRUNK: any;
     };
   }
@@ -33,7 +34,7 @@ export const SignInContents = () => {
     }
   };
 
-  useEffect(() => setVanta(), []);
+  useEffect(() => setVanta(), [setVanta]);
 
   return (
     <Grid

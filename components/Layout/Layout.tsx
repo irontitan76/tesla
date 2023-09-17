@@ -1,6 +1,6 @@
 import 'assets/fonts/gotham_ssa/stylesheet.css';
 
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Box, Toolbar } from '@mui/material';
 import { LayoutSide, LayoutSideProps } from './LayoutSide';
 import { LayoutTop } from './LayoutTop';

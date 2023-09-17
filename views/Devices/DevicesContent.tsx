@@ -3,8 +3,8 @@
 import { DataGridView } from 'components/DataGrid';
 import { Device } from 'database/objects';
 import { supabase } from 'database/client';
-import React, { useEffect, useState } from 'react';
-import { getSizeString } from 'views/Configurator/utils';
+import { useEffect, useState } from 'react';
+import { getSizeString } from 'utils';
 
 export interface DevicesContentProps {}
 

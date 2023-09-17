@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { Icon } from 'components/Icon';
 import { supabase } from 'database/client';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const metadata = {
   title: 'Dashboard',

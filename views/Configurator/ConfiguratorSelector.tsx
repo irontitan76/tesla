@@ -4,9 +4,8 @@ import { faMinus, faPlus } from '@fortawesome/sharp-light-svg-icons';
 import { Box, IconButton, IconButtonProps, List, ListItem, Stack, Typography } from '@mui/material';
 import { Heading } from 'components/Heading';
 import { Icon } from 'components/Icon';
-import React from 'react';
 import { Device, Configuration } from 'database/objects';
-import { getSizeString } from './utils';
+import { getSizeString } from 'utils';
 
 export interface ConfiguratorSelectorProps {
   batteries?: Device[];

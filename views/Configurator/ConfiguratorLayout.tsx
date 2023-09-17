@@ -4,7 +4,7 @@ import { faBattery, faUtilityPole } from '@fortawesome/sharp-light-svg-icons';
 import { Box, Grid, Stack, Tooltip, Typography } from '@mui/material';
 import { Heading } from 'components/Heading';
 import { Icon } from 'components/Icon';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Device, Configuration } from 'database/objects';
 import { supabase } from 'database/client';
 

@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 import { ColorModeProvider } from './ColorModeProvider';
 import NextAppDirEmotionCacheProvider from './EmotionCacheProvider';
 

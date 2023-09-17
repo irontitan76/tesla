@@ -3,7 +3,6 @@
 import { Stack } from '@mui/material';
 import { DataGridPremium, DataGridPremiumProps } from '@mui/x-data-grid-premium';
 import { Icon } from 'components/Icon';
-import React from 'react';
 import DataGridNoRows from './DataGridNoRows';
 import {
   faChevronDown,

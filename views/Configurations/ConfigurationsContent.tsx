@@ -3,7 +3,7 @@
 import { DataGridView } from 'components/DataGrid';
 import { Configuration, Device } from 'database/objects';
 import { supabase } from 'database/client';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Grid, ListItem } from '@mui/material';
 import { Icon } from 'components/Icon';
 import { faBattery } from '@fortawesome/sharp-light-svg-icons';

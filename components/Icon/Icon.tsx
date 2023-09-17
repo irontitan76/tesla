@@ -1,6 +1,6 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { SvgIcon, SvgIconProps } from '@mui/material';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 export interface IconProps extends SvgIconProps {
   icon: IconDefinition;

@@ -2,7 +2,6 @@ import { faMoon, faSun } from '@fortawesome/sharp-light-svg-icons';
 import { IconButton, IconButtonProps, Tooltip, TooltipProps } from '@mui/material';
 import { Icon, IconProps } from 'components/Icon';
 import { useColorMode } from 'components/ThemeRegistry';
-import React from 'react';
 
 export interface ThemeSelectorProps extends IconButtonProps {
   TooltipProps?: TooltipProps;

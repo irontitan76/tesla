@@ -13,7 +13,7 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LayoutSideItem, LayoutSideItemProps } from './LayoutSideItem';
 import { closedMixin, openedMixin } from './drawer';
 import { Icon } from 'components/Icon';

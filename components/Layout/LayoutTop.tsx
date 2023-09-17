@@ -1,9 +1,12 @@
 'use client';
 
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import {
   AppBar,
   AppBarProps,
   Grid,
+  IconButton,
+  Stack,
   StackProps,
   Toolbar,
   ToolbarProps,
@@ -11,10 +14,11 @@ import {
 } from '@mui/material';
 import { User } from '@supabase/supabase-js';
 import { Avatar } from 'components/Avatar';
+import { Icon } from 'components/Icon';
 import { Logo } from 'components/Logo';
 import { supabase } from 'database/client';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export interface LayoutTopProps extends AppBarProps {
   LogoProps?: SVGElement;
@@ -96,10 +100,23 @@ export const LayoutTop = ({
               </Typography>
           </Grid>
           <Grid item>
-            <Avatar
-              onSignOut={handleSignOut}
-              user={user}
-            />
+            <Stack
+              alignItems='center'
+              direction='row'
+              spacing={2}
+            >
+              <IconButton
+                href='https://github.com/irontitan76/tesla'
+                rel='noopener'
+                target='_blank'
+              >
+                <Icon icon={faGithub} />
+              </IconButton>
+              <Avatar
+                onSignOut={handleSignOut}
+                user={user}
+              />
+            </Stack>
           </Grid>
         </Grid>
       </Toolbar>

@@ -7,7 +7,7 @@ import {
   GridToolbarExport,
   GridToolbarQuickFilter,
 } from '@mui/x-data-grid-premium';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 export interface DataGridToolbarProps {
   title?: ReactNode;

@@ -2,7 +2,6 @@ import { faInfoCircle } from '@fortawesome/sharp-light-svg-icons';
 import { List, ListItem, Stack, Tooltip, Typography } from '@mui/material';
 import { Icon } from 'components/Icon';
 import { Heading } from 'components/Heading';
-import React from 'react';
 import { Configuration } from 'database/objects';
 
 export interface ConfiguratorSummaryProps {

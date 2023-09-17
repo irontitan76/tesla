@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import { ReactComponent as TeslaLogoDark } from 'assets/logos/tesla_dark.svg';
 import { ReactComponent as TeslaLogoLight } from 'assets/logos/tesla_light.svg';
-import React, { SVGProps } from 'react';
+import { SVGProps } from 'react';
 
 export interface LogoProps extends SVGProps<SVGSVGElement> {
   LinkProps?: LinkProps;

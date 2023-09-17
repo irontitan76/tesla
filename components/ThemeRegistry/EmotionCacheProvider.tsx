@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Provider, useState } from 'react';
+import { Provider, useState } from 'react';
 import createCache from '@emotion/cache';
 import type { EmotionCache, Options as OptionsOfCreateCache } from '@emotion/cache';
 import { CacheProvider as DefaultCacheProvider, SerializedStyles } from '@emotion/react';
