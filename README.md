@@ -13,7 +13,7 @@
 
 ### Access Deployed Application
 
-1. Navigate to <tesla.rosssheppard.com>.
+1. Navigate to [https://tesla.rosssheppard.com]().
 2. To access the platform, you can either create a new account or use the following demo account:
    1. Email Address: `nikola@tesla.com`
    2. Password: `magnets`
