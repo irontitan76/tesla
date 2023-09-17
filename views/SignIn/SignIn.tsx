@@ -1,6 +1,4 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { Database } from 'database/types';
-import { cookies } from 'next/headers';
+import { createServerSupabaseClient } from 'database/serverClient';
 import { redirect } from 'next/navigation';
 import React from 'react';
 import { SignInContents } from './SignInContents';
@@ -10,7 +8,7 @@ export const metadata = {
 };
 
 export const SignIn = async () => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const supabase = createServerSupabaseClient();
   const { data: { session }} = await supabase.auth.getSession();
 
   if (session) {

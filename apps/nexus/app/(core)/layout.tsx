@@ -5,9 +5,7 @@ import {
   faGaugeSimple,
   faIndustry,
 } from '@fortawesome/sharp-light-svg-icons';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { Database } from 'database/types';
-import { cookies } from 'next/headers';
+import { createServerSupabaseClient } from 'database/serverClient';
 import { redirect } from 'next/navigation';
 import { Layout } from 'components/Layout';
 import { ReactNode } from 'react';
@@ -46,8 +44,8 @@ const items = [
   },
 ];
 
-export const RootLayout = async ({ children }: { children: ReactNode}) => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+export default async function RootLayout({ children }: { children: ReactNode}) {
+  const supabase = createServerSupabaseClient();
   const { data: { session }} = await supabase.auth.getSession();
 
   if (!session) {
@@ -58,5 +56,3 @@ export const RootLayout = async ({ children }: { children: ReactNode}) => {
     <Layout side={{ items: items }}>{children}</Layout>
   );
 };
-
-export default RootLayout;
