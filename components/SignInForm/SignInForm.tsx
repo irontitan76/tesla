@@ -1,10 +1,10 @@
 'use client';
 
-import { AuthForm } from 'components/AuthForm';
+import { AuthForm, AuthFormType } from 'components/AuthForm';
 import { supabase } from 'database/client';
 
 export const SignInForm = () => {
-  const handleSubmit = async (form) => {
+  const handleSubmit = async (form: AuthFormType) => {
     return supabase.auth.signInWithPassword({
       email: form.email,
       password: form.password,

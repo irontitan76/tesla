@@ -11,16 +11,18 @@ import {
   StackProps,
   TextField,
   TextFieldProps,
+  Theme,
   Typography,
 } from "@mui/material";
+import { AuthResponse } from "@supabase/supabase-js";
 import { Icon } from 'components/Icon';
 import { Logo } from 'components/Logo';
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, SetStateAction, useState } from "react";
 
 
 export type AuthFormType = {
-  [K in AuthFormProps<any>['fields'][number]['name']]: string;
+  [K in AuthFormProps<any>['fields'][number]['name']]: any;
 };
 
 export interface AuthAlert {
@@ -28,21 +30,40 @@ export interface AuthAlert {
   text: string;
 }
 
+export type Field<T> = Partial<Omit<TextFieldProps, 'name'>>
+& { name: Required<TextFieldProps>['name'] } // ensure name is provided
+& T;
+
+export type AddMessage = (text: string) => void;
+
+export type OnSuccess = (
+  form: AuthFormType,
+  event: FormEvent<HTMLFormElement>,
+) => Promise<AuthResponse>;
+
+export type OnValidate = ({
+  addError,
+  addInfo,
+  addSuccess,
+  addWarning,
+  form,
+}: {
+  addError: AddMessage,
+  addInfo: AddMessage,
+  addSuccess: AddMessage,
+  addWarning: AddMessage,
+  form: AuthFormType,
+}) => boolean;
+
 // TODO: update "any" function types below
 export interface AuthFormProps<T> {
-  fields: Array<
-    Partial<Omit<TextFieldProps, 'name'>>
-    & { name: Required<TextFieldProps>['name'] } // ensure name is provided
-    & T
-  >;
+  fields: Array<Field<T>>;
   linkHref?: string;
   linkText?: LinkProps['children'];
-  onError?: any;
-  onSubmit: (form: AuthFormType, event: FormEvent<HTMLFormElement>) => (
-    Promise<{ data: any, error: Error }>
-  );
-  onSuccess?: any;
-  onValidate?: any;
+  onError?: (error: Error) => void;
+  onSubmit: OnSuccess;
+  onSuccess?: (data: any) => void;
+  onValidate?: OnValidate;
   pushTo?: string;
   submitText?: string;
 }
@@ -61,11 +82,11 @@ export const AuthForm = <T,>({
   const router = useRouter();
   const [message, setMessage] = useState<AuthAlert>({ text: '', severity: 'info' });
 
-  const [form, setForm] = useState<{ [key: string]: string }>(
+  const [form, setForm] = useState<{ [key: string]: unknown }>(
     fields.reduce((prev, curr) => {
       prev[curr.name] = curr.value;
       return prev;
-    }, {}));
+    }, {} as { [key: string]: unknown }));
 
   const handleChange: TextFieldProps['onChange'] = (event) => {
     setForm({
@@ -120,7 +141,7 @@ export const AuthForm = <T,>({
     }
   };
 
-  const inputStyles = ({ palette }) => ({
+  const inputStyles = ({ palette }: Theme) => ({
     textAlign: 'center',
     '&:-webkit-autofill': {
       '-webkit-background-clip': 'text',

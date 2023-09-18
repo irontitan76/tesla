@@ -52,7 +52,6 @@ export const DashboardPanels = ({
   return (
     <Grid
       container
-      height='calc(100vh - 96px)'
       justifyContent='center'
       spacing={3}
     >
@@ -184,7 +183,6 @@ export const DashboardPanels = ({
               border='1px solid'
               borderColor='divider'
               color='text.primary'
-              height={500}
               px={2}
               py={1}
               sx={{
@@ -194,7 +192,8 @@ export const DashboardPanels = ({
               <MDXRemote
                 options={{
                   mdxOptions: {
-                    development: true,
+                    // https://github.com/hashicorp/next-mdx-remote/issues/350#issuecomment-1461558918
+                    development: process.env.NODE_ENV === 'development',
                   },
                 }}
                 source={markdown}

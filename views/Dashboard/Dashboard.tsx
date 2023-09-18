@@ -5,7 +5,7 @@ export const metadata = {
 };
 
 export const Dashboard = async () => {
-  const res = await fetch('https://raw.githubusercontent.com/irontitan76/tesla/irontitan76-patch-1/README.md')
+  const res = await fetch('https://raw.githubusercontent.com/irontitan76/tesla/main/README.md')
   const markdown = await res.text();
 
   return (
