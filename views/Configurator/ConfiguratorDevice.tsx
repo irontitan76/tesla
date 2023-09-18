@@ -3,6 +3,7 @@ import { Box as Box3D, OrbitControls, TrackballControls } from '@react-three/dre
 
 import { useTheme } from "@mui/material";
 import { ReactNode, useEffect, useRef, useState } from "react";
+import { Device } from "database/objects";
 
 export interface ConfiguratorDeviceProps {
   args: [number, number, number];
@@ -13,7 +14,6 @@ export interface ConfiguratorDeviceProps {
 // TODO: Finish typing these components (beta)
 export const ConfiguratorDevice = ({
   args  = [2, 2, 4],
-  devices,
   type,
   ...rest
 }: ConfiguratorDeviceProps) => {
@@ -28,12 +28,6 @@ export const ConfiguratorDevice = ({
 
   const baseColor = type === 'Transformer' ? palette.primary.main : palette.secondary.main;
 
-  const totalWidth = devices.reduce((acc, cur) => {
-    acc += cur;
-    return acc;
-  }, 0);
-
-  console.log(totalWidth)
   return (
     <Box3D
       args={args}
