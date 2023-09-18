@@ -2,15 +2,21 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { Box as Box3D, TrackballControls } from '@react-three/drei';
 
 import { useTheme } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
-// TODO: Finish typing these components
+export interface ConfiguratorDeviceProps {
+  args: [number, number, number];
+  position: [number, number, number];
+  type?: string;
+}
+
+// TODO: Finish typing these components (beta)
 export const ConfiguratorDevice = ({
   args  = [2, 2, 4],
   type,
   ...rest
-}: any) => {
-  const ref = useRef();
+}: ConfiguratorDeviceProps) => {
+  const ref = useRef<any>();
   const { palette } = useTheme();
   const [hovered, hover] = useState(false);
   const { camera } = useThree();
@@ -19,7 +25,7 @@ export const ConfiguratorDevice = ({
     camera.position.set(0, 25, 20); // Set an initial camera position
   }, [camera]);
 
-  const baseColor = type.name === 'Transformer' ? palette.primary.main : palette.secondary.main;
+  const baseColor = type === 'Transformer' ? palette.primary.main : palette.secondary.main;
 
   return (
     <Box3D
@@ -37,7 +43,11 @@ export const ConfiguratorDevice = ({
   );
 };
 
-export const ConfiguratorCanvas = ({ children }: any) => {
+export interface ConfiguratorCanvas {
+  children: ReactNode;
+}
+
+export const ConfiguratorCanvas = ({ children }: ConfiguratorCanvas) => {
   return (
     <Canvas>
       <ambientLight

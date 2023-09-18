@@ -100,6 +100,9 @@ export const Avatar = ({
 
   return (
     <Box
+      // Box from @react-three/drei and @mui/material are somehow
+      // augmenting types wrongly
+      // @ts-expect-error — TODO: fix
       border='2px solid transparent'
       p={0.9}
       sx={{
@@ -146,7 +149,7 @@ export const Avatar = ({
                     bgcolor: 'secondary.main',
                     display: 'flex',
                     flexDirection: 'column',
-                    // m: 2,
+                    m: 2,
                     mt: '30px',
                     width: 300,
                   }}
@@ -157,8 +160,8 @@ export const Avatar = ({
                       display='flex'
                       height={120}
                       justifyContent='center'
-                      // p={2}
-                      // mt={2}
+                      p={2}
+                      mt={2}
                     >
                       <Typography
                         color='secondary.contrastText'

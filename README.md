@@ -9,13 +9,14 @@ The following sections describe how to get started with this application as well
 ## Highlights
 
 1. **Themes**: light and dark can be toggled via the ThemeSelector component found in the User Menu for protected routes or at the bottom of unprotected routes.
-2. **About View**: This renders this README.md to the screen using MDX.
-3. **Devices View**: This makes a request to Supabase for all devices (batteries and transformers) and renders them into a virtualized list.
-4. **Configurations View**: This makes a request to Supabase for all configurations, or layouts, and renders them into a virtualized list.
-5. **Configurator View**: The core aspect of this evaluation and renders a battery selector panel, summary pane, and layout generator.
-6. **SignIn View**: A view consisting of an email and password login form that pushes the route to Industrial Design platform once entered and confirmed.
-7. **SignUp View**: A view consisting of an email, password, and confirm password that pushes the route to Industrial Design platform once the user is successfully created.
-8. **NotFound View**: Check out a NotFound view that contains a cool visualization, e.g., [https://tesla.rosssheppard.com/nonexistent](https://tesla.rosssheppard.com/nonexistent).
+2. **3D Visualizations": The configurator layout has a 3D option that uses three.js under the hood to better visualize the layout. Note that this is a beta preview and the 2D version has all requirements met.
+3. **About View**: This renders this README.md to the screen using MDX.
+4. **Devices View**: This makes a request to Supabase for all devices (batteries and transformers) and renders them into a virtualized list.
+5. **Configurations View**: This makes a request to Supabase for all configurations, or layouts, and renders them into a virtualized list.
+6. **Configurator View**: The core aspect of this evaluation and renders a battery selector panel, summary pane, and layout generator.
+7. **SignIn View**: A view consisting of an email and password login form that pushes the route to Industrial Design platform once entered and confirmed.
+8. **SignUp View**: A view consisting of an email, password, and confirm password that pushes the route to Industrial Design platform once the user is successfully created.
+9. **NotFound View**: Check out a NotFound view that contains a cool visualization, e.g., [https://tesla.rosssheppard.com/nonexistent](https://tesla.rosssheppard.com/nonexistent).
 
 ## Quickstart
 

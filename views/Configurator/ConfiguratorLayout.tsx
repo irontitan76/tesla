@@ -63,7 +63,7 @@ export const ConfiguratorLayout = ({
   });
 
   let cumulativeWidths = layoutItems.map((_, index) =>
-    layoutItems.slice(0, index).reduce((sum, item) => sum + item.width, 0)
+    layoutItems.slice(0, index).reduce((sum, item) => sum + (item?.width ?? 0), 0)
   );
 
   return (
@@ -78,7 +78,6 @@ export const ConfiguratorLayout = ({
         <FormControlLabel
           control={(
             <Switch
-              defaultChecked
               onChange={() => setEnable3D(!enable3D)}
             />
           )}
@@ -152,15 +151,15 @@ export const ConfiguratorLayout = ({
             ) : null;
           })}
         </Stack>
-        {!enable3D && (
-          <Typography
-            align='center'
-            p={2}
-            width='100%'
-          >
-            100ft
-          </Typography>
-        )}
+        <Typography
+          align='center'
+          color={enable3D ? 'secondary.main' : undefined}
+          fontWeight='bold'
+          p={2}
+          width='100%'
+        >
+          {enable3D ? '3D visualizations is in beta — not all functionalities will work as intended.' : '100ft'}
+        </Typography>
       </Grid>
     </Grid>
   );

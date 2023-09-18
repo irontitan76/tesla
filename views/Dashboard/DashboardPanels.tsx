@@ -47,14 +47,14 @@ export const DashboardPanels = () => {
   return (
     <Grid
       container
-      justifyContent='center'
       spacing={3}
     >
       {metrics.map(({ count, displayName, icon }) => (
         <Grid
           item
           key={displayName}
-          xl={4}
+          md={4}
+          xs={12}
         >
           <Card elevation={0}>
             <CardContent
@@ -101,7 +101,11 @@ export const DashboardPanels = () => {
           </Card>
         </Grid>
       ))}
-      <Grid item xl={4}>
+      <Grid
+        item
+        md={4}
+        xs={12}
+      >
         <Link
           href='/configurator'
           sx={{

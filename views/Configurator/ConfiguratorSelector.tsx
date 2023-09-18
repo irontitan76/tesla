@@ -22,10 +22,10 @@ export const ConfiguratorSelector = ({
   onRemove,
   transformer,
 }: ConfiguratorSelectorProps) => {
-  const count = configuration.items.reduce((acc, curr) => {
+  const count = configuration?.items.reduce((acc, curr) => {
     acc[curr] = (acc[curr] || 0) + 1;
     return acc;
-  }, {});
+  }, {} as { [key: string]: number });
 
   return (
     <Stack>
@@ -37,14 +37,14 @@ export const ConfiguratorSelector = ({
         {batteries.map((device) => device ? (
           <ConfiguratorSelection
             configuration={configuration}
-            count={count[device.id]}
+            count={count?.[device.id] ?? 0}
             device={device}
             onAdd={onAdd}
             onRemove={onRemove}
           />
         ): null)}
           <ConfiguratorSelection
-            count={configuration.totalTransformers}
+            count={configuration?.totalTransformers ?? 0}
             device={transformer}
             showControls={false}
           >
