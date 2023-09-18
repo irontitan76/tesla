@@ -3,9 +3,16 @@
 import { Box, Grid } from '@mui/material';
 import { SignUpForm } from 'components/SignUpForm';
 import { ThemeSelector } from 'components/ThemeSelector';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-export const SignUpContents = () => {
+export const SignUpContents = ({ session }: any) => {
+  const router = useRouter();
+
+  if (session) {
+    router.push('/');
+  }
+
   const setVanta = () => {
     try {
       if (window.VANTA) {

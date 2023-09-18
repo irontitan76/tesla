@@ -1,4 +1,4 @@
-import { createServerSupabaseClient } from 'database/serverClient';import { Database } from 'database/types';
+import { createServerSupabaseClient } from 'database/serverClient';
 import { redirect } from 'next/navigation';
 import { SignUpContents } from './SignUpContents';
 
@@ -7,6 +7,13 @@ export const metadata = {
 };
 
 export const SignUp = async () => {
+  const supabase = createServerSupabaseClient();
+  const { data: { session }} = await supabase.auth.getSession();
+
+  if (session) {
+    redirect('/');
+  }
+
   return (
     <SignUpContents />
   );

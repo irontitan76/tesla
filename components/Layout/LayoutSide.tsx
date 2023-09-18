@@ -3,20 +3,15 @@
 import { faCloudArrowDown } from '@fortawesome/sharp-light-svg-icons';
 import {
   Button,
-  Collapse,
   Drawer,
-  Fade,
   Grid,
-  Link,
   List,
   Toolbar,
-  Typography,
   useTheme,
 } from '@mui/material';
 import { useState } from 'react';
 import { LayoutSideItem, LayoutSideItemProps } from './LayoutSideItem';
 import { closedMixin, openedMixin } from './drawer';
-import { Icon } from 'components/Icon';
 
 const drawerWidth = 240;
 

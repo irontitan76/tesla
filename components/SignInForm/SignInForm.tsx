@@ -2,9 +2,9 @@
 
 import { AuthForm, AuthFormType } from 'components/AuthForm';
 import { supabase } from 'database/client';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
-export const SignInForm = () => {
+export const SignInForm = ({ session }: any) => {
   const router = useRouter();
 
   const handleSubmit = async (form: AuthFormType) => {
@@ -18,7 +18,7 @@ export const SignInForm = () => {
     const { data: { session }} = await supabase.auth.getSession();
 
     if (session) {
-      router.push('/');
+      router.refresh();
     }
   };
 

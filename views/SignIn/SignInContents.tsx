@@ -3,7 +3,7 @@
 import { Box, Grid, useTheme } from '@mui/material';
 import { SignInForm } from 'components/SignInForm';
 import { ThemeSelector } from 'components/ThemeSelector';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 declare global {
   interface Window {

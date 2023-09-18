@@ -5,16 +5,13 @@ import { supabase } from 'database/client';
 import { useRouter } from 'next/navigation';
 
 
-export const SignUpForm = () => {
+export const SignUpForm = ({ session }: any) => {
   const router = useRouter();
 
   const handleSubmit = async (form: AuthFormType) => {
     return supabase.auth.signUp({
       email: form.email,
       password: form.password,
-      options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
-      },
     });
   };
 
@@ -22,7 +19,7 @@ export const SignUpForm = () => {
     const { data: { session }} = await supabase.auth.getSession();
 
     if (session) {
-      router.push('/');
+      router.refresh();
     }
   };
 

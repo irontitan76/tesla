@@ -1,5 +1,3 @@
-import { createServerSupabaseClient } from 'database/serverClient';
-import { redirect } from 'next/navigation';
 import {
   faArrowProgress,
   faBatteryBolt,
@@ -52,13 +50,6 @@ const items = [
 ];
 
 export default async function RootLayout({ children }: { children: ReactNode}) {
-  const supabase = createServerSupabaseClient();
-  const { data: { session }} = await supabase.auth.getSession();
-
-  if (!session) {
-    redirect('/auth/signin');
-  }
-
   return (
     <Layout side={{ items: items }}>{children}</Layout>
   );
