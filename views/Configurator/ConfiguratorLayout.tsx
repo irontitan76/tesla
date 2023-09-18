@@ -115,7 +115,7 @@ export const ConfiguratorLayout = ({
                 return item ? (
                   <ConfiguratorDevice
                     args={[item.width / 10, 2, 2]}
-                    position={[cumulativeWidths[index] / 10 + index * 1, 0, 0]}
+                    position={[cumulativeWidths[index] / 10 + index, 0, 0]}
                     type={item.name}
                   />
                 ): null;
@@ -133,12 +133,14 @@ export const ConfiguratorLayout = ({
                   borderRadius={2}
                   display='flex'
                   flexDirection='column'
+                  height={`calc((${item.depth} / 100) * 100%)`}
                   gap={1}
                   justifyContent='center'
                   p={1}
                   sx={{
                     perspective: 800,
                   }}
+                  width={`calc((${item.width} / 100) * 100%)`}
                 >
                   <Icon
                     icon={item.name === 'Transformer' ? faUtilityPole : faBattery}

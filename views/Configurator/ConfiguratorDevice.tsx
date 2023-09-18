@@ -1,5 +1,5 @@
-import { Canvas, useThree } from "@react-three/fiber";
-import { Box as Box3D, TrackballControls } from '@react-three/drei';
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Box as Box3D, OrbitControls, TrackballControls } from '@react-three/drei';
 
 import { useTheme } from "@mui/material";
 import { ReactNode, useEffect, useRef, useState } from "react";
@@ -13,6 +13,7 @@ export interface ConfiguratorDeviceProps {
 // TODO: Finish typing these components (beta)
 export const ConfiguratorDevice = ({
   args  = [2, 2, 4],
+  devices,
   type,
   ...rest
 }: ConfiguratorDeviceProps) => {
@@ -27,6 +28,12 @@ export const ConfiguratorDevice = ({
 
   const baseColor = type === 'Transformer' ? palette.primary.main : palette.secondary.main;
 
+  const totalWidth = devices.reduce((acc, cur) => {
+    acc += cur;
+    return acc;
+  }, 0);
+
+  console.log(totalWidth)
   return (
     <Box3D
       args={args}
@@ -62,7 +69,7 @@ export const ConfiguratorCanvas = ({ children }: ConfiguratorCanvas) => {
         position={[-10, -10, -10]}
       />
       {children}
-      <TrackballControls />
+      <OrbitControls />
     </Canvas>
   );
 };
