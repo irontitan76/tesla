@@ -26,13 +26,7 @@ export interface LayoutTopProps extends AppBarProps {
   ToolbarProps?: ToolbarProps;
 }
 
-export const LayoutTop = ({
-  LogoProps,
-  StackProps,
-  ToolbarProps,
-  sx,
-  ...rest
-}: LayoutTopProps) => {
+export const LayoutTop = ({ LogoProps, StackProps, ToolbarProps, sx, ...rest }: LayoutTopProps) => {
   const router = useRouter();
   const [user, setUser] = useState<User>();
 
@@ -40,13 +34,13 @@ export const LayoutTop = ({
     const fetchUser = async () => {
       const { data } = await supabase.auth.getUser();
 
-        if (data?.user) {
-          setUser(data.user);
-        }
-      };
+      if (data?.user) {
+        setUser(data.user);
+      }
+    };
 
-      fetchUser();
-    }, []);
+    fetchUser();
+  }, []);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -77,30 +71,33 @@ export const LayoutTop = ({
           px={2}
           {...StackProps}
         >
-          <Grid item mt={1}>
+          <Grid
+            item
+            mt={1}
+          >
             <Logo />
             <Typography
-                bottom={5}
-                display={{
-                  md: 'inline-flex',
-                  xs: 'none',
-                }}
-                ml={2}
-                position='relative'
-                sx={{
-                  '&:before': {
-                    bgcolor: 'text.primary',
-                    blockSize: 20,
-                    content: '""',
-                    inlineSize: 1,
-                    mr: 2,
-                    position: 'relative',
-                    top: 3,
-                  },
-                }}
-              >
-                Industrial Energy
-              </Typography>
+              bottom={5}
+              display={{
+                md: 'inline-flex',
+                xs: 'none',
+              }}
+              ml={2}
+              position='relative'
+              sx={{
+                '&:before': {
+                  bgcolor: 'text.primary',
+                  blockSize: 20,
+                  content: '""',
+                  inlineSize: 1,
+                  mr: 2,
+                  position: 'relative',
+                  top: 3,
+                },
+              }}
+            >
+              Industrial Energy
+            </Typography>
           </Grid>
           <Grid item>
             <Stack

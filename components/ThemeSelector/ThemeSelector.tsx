@@ -8,11 +8,7 @@ export interface ThemeSelectorProps extends IconButtonProps {
   IconProps?: Partial<IconProps>;
 }
 
-export const ThemeSelector = ({
-  TooltipProps,
-  IconProps,
-  ...rest
-}: ThemeSelectorProps) => {
+export const ThemeSelector = ({ TooltipProps, IconProps, ...rest }: ThemeSelectorProps) => {
   const { mode, toggleColorMode } = useColorMode();
   const isDark = mode === 'dark';
 
@@ -21,8 +17,14 @@ export const ThemeSelector = ({
       title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       {...TooltipProps}
     >
-      <IconButton onClick={toggleColorMode} {...rest}>
-        <Icon icon={isDark ? faSun : faMoon} {...IconProps} />
+      <IconButton
+        onClick={toggleColorMode}
+        {...rest}
+      >
+        <Icon
+          icon={isDark ? faSun : faMoon}
+          {...IconProps}
+        />
       </IconButton>
     </Tooltip>
   );

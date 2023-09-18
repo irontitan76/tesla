@@ -18,7 +18,6 @@ import { ReactNode } from 'react';
 
 export interface LayoutSideItemProps extends ListItemProps {
   children?: ReactNode;
-  flag?: boolean;
   href?: LinkProps['href'];
   icon?: IconProps['icon'];
   ListItemButtonProps?: ListItemButtonProps;
@@ -28,7 +27,6 @@ export interface LayoutSideItemProps extends ListItemProps {
 
 export const LayoutSideItem = ({
   children,
-  flag, // TODO: do something with this
   href,
   icon,
   ListItemButtonProps,
@@ -39,7 +37,10 @@ export const LayoutSideItem = ({
   const pathname = usePathname();
 
   return (
-    <ListItem disablePadding {...rest}>
+    <ListItem
+      disablePadding
+      {...rest}
+    >
       <ListItemButton
         component={Link}
         href={href}
@@ -54,7 +55,8 @@ export const LayoutSideItem = ({
           <ListItemIcon
             sx={{
               '& svg': {
-                fill: ({ palette }) => pathname === href ? palette.secondary.main : palette.text.primary,
+                fill: ({ palette }) =>
+                  pathname === href ? palette.secondary.main : palette.text.primary,
                 transition: 'all 0.3s ease-in-out',
               },
             }}

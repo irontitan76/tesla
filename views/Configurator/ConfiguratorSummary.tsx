@@ -6,9 +6,7 @@ export interface ConfiguratorSummaryProps {
   configuration?: Configuration;
 }
 
-export const ConfiguratorSummary = ({
-  configuration,
-}: ConfiguratorSummaryProps) => {
+export const ConfiguratorSummary = ({ configuration }: ConfiguratorSummaryProps) => {
   if (!configuration) {
     return null;
   }
@@ -19,41 +17,23 @@ export const ConfiguratorSummary = ({
     py: 0.5,
   };
 
-  const {
-    totalCost,
-    totalDepth,
-    totalEnergy,
-    totalTransformers,
-    totalWidth,
-  } = configuration;
+  const { totalCost, totalDepth, totalEnergy, totalTransformers, totalWidth } = configuration;
 
   return (
     <Stack py={2}>
-      <Heading mb={0}>
-        Summary
-      </Heading>
+      <Heading mb={0}>Summary</Heading>
       <List>
         <ListItem sx={listItemStyles}>
           <Typography>Cost</Typography>
-          <Typography>
-            {`$${totalCost.toLocaleString()}`}
-          </Typography>
+          <Typography>{`$${totalCost.toLocaleString()}`}</Typography>
         </ListItem>
         <ListItem sx={listItemStyles}>
-          <Typography>
-            Energy
-          </Typography>
-          <Typography>
-            {totalEnergy / 1000000} MWh
-          </Typography>
+          <Typography>Energy</Typography>
+          <Typography>{totalEnergy / 1000000} MWh</Typography>
         </ListItem>
         <ListItem sx={listItemStyles}>
-          <Typography>
-            Dimensions
-          </Typography>
-          <Typography>
-            {`${totalWidth}ft x ${totalDepth}ft`}
-          </Typography>
+          <Typography>Dimensions</Typography>
+          <Typography>{`${totalWidth}ft x ${totalDepth}ft`}</Typography>
         </ListItem>
       </List>
     </Stack>

@@ -26,10 +26,7 @@ export const ConfiguratorLayout = ({
 
   useEffect(() => {
     const fetchTransformerConfig = async () => {
-      const { data: transformers } = await supabase
-        .from('transformers')
-        .select()
-        .eq('id', 0);
+      const { data: transformers } = await supabase.from('transformers').select().eq('id', 0);
 
       if (transformers) {
         setTransformerConfig(transformers[0]);
@@ -46,17 +43,20 @@ export const ConfiguratorLayout = ({
   const layoutItems = [
     ...configuration.items.map((item) => batteries.find((battery) => battery.id === item)),
     // Use requested configuration or fallback to client-side default
-    ...new Array(configuration?.totalTransformers).fill(null).map(() => transformerConfig ?? {
-      cost: 10000,
-      depth: 10,
-      energy: -500000,
-      id: 'transformer-1',
-      name: 'Transformer',
-      width: 10,
-    }),
+    ...new Array(configuration?.totalTransformers).fill(null).map(
+      () =>
+        transformerConfig ?? {
+          cost: 10000,
+          depth: 10,
+          energy: -500000,
+          id: 'transformer-1',
+          name: 'Transformer',
+          width: 10,
+        }
+    ),
   ].sort((a, b) => {
     if (a?.depth && b?.depth) {
-     return a?.depth - b.depth
+      return a?.depth - b.depth;
     }
 
     return 0;
@@ -72,21 +72,27 @@ export const ConfiguratorLayout = ({
       container
       justifyContent='space-between'
     >
-      <Grid item xs={6}>
+      <Grid
+        item
+        xs={6}
+      >
         <Heading mb={3}>Site Layout</Heading>
       </Grid>
-      <Grid item xs={6} textAlign='right'>
+      <Grid
+        item
+        xs={6}
+        textAlign='right'
+      >
         <FormControlLabel
-          control={(
-            <Switch
-              onChange={() => setEnable3D(!enable3D)}
-            />
-          )}
+          control={<Switch onChange={() => setEnable3D(!enable3D)} />}
           label='Enable 3D'
           sx={{ mb: 3 }}
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid
+        item
+        xs={12}
+      >
         <Stack
           alignContent='flex-start'
           bgcolor={({ palette }) => `${palette.background.paper}30`}
@@ -94,7 +100,7 @@ export const ConfiguratorLayout = ({
           borderColor='divider'
           direction='row'
           flexWrap='wrap'
-          height={orientation ==='vertical' ? 'calc(100vh - 285px)' : 500}
+          height={orientation === 'vertical' ? 'calc(100vh - 285px)' : 500}
           justifyContent='space-between'
           gap={2}
           p={2}
@@ -119,42 +125,40 @@ export const ConfiguratorLayout = ({
                     position={[cumulativeWidths[index] / 10 + index, 0, 0]}
                     type={item.name}
                   />
-                ): null;
+                ) : null;
               })}
             </ConfiguratorCanvas>
           )}
-          {!enable3D && layoutItems.map((item, index) => {
-            return item ? (
-              <Tooltip key={`${item.name}${index}`} title={item.name}>
-                <Box
-                  alignItems='center'
-                  bgcolor='background.card'
-                  border='1px solid'
-                  borderColor='divider'
-                  borderRadius={2}
-                  display='flex'
-                  flexDirection='column'
-                  height={`calc((${item.depth} / 100) * 100%)`}
-                  gap={1}
-                  justifyContent='center'
-                  p={1}
-                  sx={{
-                    perspective: 800,
-                  }}
-                  width={`calc((${item.width} / 100) * 100%)`}
+          {!enable3D &&
+            layoutItems.map((item, index) => {
+              return item ? (
+                <Tooltip
+                  key={`${item.name}${index}`}
+                  title={item.name}
                 >
-                  <Icon
-                    icon={item.name === 'Transformer' ? faUtilityPole : faBattery}
-                  />
-                  <Typography
-                    fontSize={9}
+                  <Box
+                    alignItems='center'
+                    bgcolor='background.card'
+                    border='1px solid'
+                    borderColor='divider'
+                    borderRadius={2}
+                    display='flex'
+                    flexDirection='column'
+                    height={`calc((${item.depth} / 100) * 100%)`}
+                    gap={1}
+                    justifyContent='center'
+                    p={1}
+                    sx={{
+                      perspective: 800,
+                    }}
+                    width={`calc((${item.width} / 100) * 100%)`}
                   >
-                    {item.name}
-                  </Typography>
-                </Box>
-              </Tooltip>
-            ) : null;
-          })}
+                    <Icon icon={item.name === 'Transformer' ? faUtilityPole : faBattery} />
+                    <Typography fontSize={9}>{item.name}</Typography>
+                  </Box>
+                </Tooltip>
+              ) : null;
+            })}
         </Stack>
         <Typography
           align='center'
@@ -163,7 +167,9 @@ export const ConfiguratorLayout = ({
           p={2}
           width='100%'
         >
-          {enable3D ? '3D visualizations is in beta — not all functionalities will work as intended.' : '100ft'}
+          {enable3D
+            ? '3D visualizations is in beta — not all functionalities will work as intended.'
+            : '100ft'}
         </Typography>
       </Grid>
     </Grid>

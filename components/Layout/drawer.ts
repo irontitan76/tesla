@@ -1,18 +1,18 @@
-import { CSSObject, Theme} from '@mui/material';
+import { CSSObject, Theme } from '@mui/material';
 
 export interface DrawerMixinOptions {
   isDrawerOpen?: boolean;
-  width? : string | number;
+  width?: string | number;
 }
 
 export interface DrawerMixin {
   (theme: Theme, options: DrawerMixinOptions): CSSObject;
 }
 
-export const openedMixin: DrawerMixin = ({
-  palette,
-  transitions,
-}, { isDrawerOpen, width = 240 }) => ({
+export const openedMixin: DrawerMixin = (
+  { palette, transitions },
+  { isDrawerOpen, width = 240 }
+) => ({
   bgcolor: {
     dark: 'background.paper',
     light: 'background.paper',
@@ -27,12 +27,10 @@ export const openedMixin: DrawerMixin = ({
   width,
 });
 
-export const closedMixin: DrawerMixin = ({
-  breakpoints,
-  palette,
-  spacing,
-  transitions,
-}, { isDrawerOpen }) => ({
+export const closedMixin: DrawerMixin = (
+  { breakpoints, palette, spacing, transitions },
+  { isDrawerOpen }
+) => ({
   bgcolor: {
     dark: 'background.paper',
     light: 'background.paper',

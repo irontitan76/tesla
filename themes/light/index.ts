@@ -5,8 +5,10 @@ import { components } from './components';
 import { palette } from './palette';
 import { shape } from './shape';
 
-export const themeLight = createTheme(merge(themeCommon, {
-  components,
-  palette,
-  shape,
-}));
+export const themeLight = createTheme(
+  merge(themeCommon, {
+    components,
+    palette,
+    shape,
+  })
+);

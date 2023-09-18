@@ -1,16 +1,7 @@
 'use client';
-import {
-  CssBaseline,
-  ThemeProvider,
-} from '@mui/material';
-import {
-  ReactNode,
-  useEffect,
-  useState,
-} from 'react';
-import {
-  Cookies,
-} from 'react-cookie';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { ReactNode, useEffect, useState } from 'react';
+import { Cookies } from 'react-cookie';
 
 import { ColorModeContext } from './ColorModeContext';
 import { ColorModeValues, teslaDark } from './types';
@@ -20,9 +11,7 @@ export interface ColorModeProviderProps {
   children: ReactNode;
 }
 
-export const ColorModeProvider = ({
-  children,
-}: ColorModeProviderProps) => {
+export const ColorModeProvider = ({ children }: ColorModeProviderProps) => {
   const [mode, setMode] = useState<ColorModeValues>(teslaDark);
 
   useEffect(() => {
@@ -31,16 +20,12 @@ export const ColorModeProvider = ({
   }, [mode]);
 
   return (
-    <ColorModeContext.Provider
-      value={useGetColorMode(mode, setMode)}
-    >
+    <ColorModeContext.Provider value={useGetColorMode(mode, setMode)}>
       <ThemeProvider
         key={mode}
         theme={useGetTheme(mode)}
       >
-        <CssBaseline
-          enableColorScheme
-        />
+        <CssBaseline enableColorScheme />
         {children}
       </ThemeProvider>
     </ColorModeContext.Provider>

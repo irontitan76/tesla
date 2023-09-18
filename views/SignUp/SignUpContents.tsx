@@ -21,16 +21,16 @@ export const SignUpContents = ({ session }: any) => {
           mouseControls: true,
           touchControls: true,
           gyroControls: false,
-          minHeight: 200.00,
-          minWidth: 200.00,
-          scale: 1.00,
+          minHeight: 200.0,
+          minWidth: 200.0,
+          scale: 1.0,
           color1: '#333333',
           color2: '#555555',
-          size: 5.00,
-          speed: 1.50
+          size: 5.0,
+          speed: 1.5,
         });
       }
-    } catch(error) {
+    } catch (error) {
       // just render bg if there's issues
       console.log('Are you running FireFox? The visualization is unsupported.');
       console.log(error);
@@ -64,9 +64,7 @@ export const SignUpContents = ({ session }: any) => {
             borderTopRightRadius: 16,
           }}
         >
-          <ThemeSelector
-            IconProps={{ sx: { color: 'text.primary' }}}
-          />
+          <ThemeSelector IconProps={{ sx: { color: 'text.primary' } }} />
         </Box>
       </Grid>
     </Grid>

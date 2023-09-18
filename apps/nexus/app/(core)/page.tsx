@@ -1,4 +1,1 @@
-export {
-  Dashboard as default,
-  metadata,
-} from 'views/Dashboard';
+export { Dashboard as default, metadata } from 'views/Dashboard';

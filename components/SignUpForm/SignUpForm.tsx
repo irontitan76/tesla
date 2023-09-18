@@ -4,7 +4,6 @@ import { AuthForm, AuthFormType, OnValidate } from 'components/AuthForm';
 import { supabase } from 'database/client';
 import { useRouter } from 'next/navigation';
 
-
 export const SignUpForm = ({ session }: any) => {
   const router = useRouter();
 
@@ -16,17 +15,16 @@ export const SignUpForm = ({ session }: any) => {
   };
 
   const handleSuccess = async () => {
-    const { data: { session }} = await supabase.auth.getSession();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
     if (session) {
       router.refresh();
     }
   };
 
-  const handleValidate: OnValidate = ({
-    addError,
-    form,
-  }) => {
+  const handleValidate: OnValidate = ({ addError, form }) => {
     if (form.password !== form.confirmPassword) {
       addError('Passwords do not match.');
       return false;

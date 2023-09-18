@@ -1,4 +1,1 @@
-export {
-  SignUp as default,
-  metadata,
-} from 'views/SignUp';
+export { SignUp as default, metadata } from 'views/SignUp';

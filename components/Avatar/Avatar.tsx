@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  faArrowRightFromBracket,
-  faMoon,
-  faSun,
-  faUser,
-} from '@fortawesome/sharp-light-svg-icons';
+import { faArrowRightFromBracket, faMoon, faSun, faUser } from '@fortawesome/sharp-light-svg-icons';
 import {
   Box,
   ClickAwayListener,
@@ -57,19 +52,14 @@ const getGreetingByTimezone = () => {
   }
 
   return greeting;
-}
+};
 
 export interface AvatarProps extends MuiAvatarProps {
   onSignOut?: MenuItemProps['onClick'];
   user?: User;
-};
+}
 
-export const Avatar = ({
-  children,
-  onSignOut,
-  user,
-  ...rest
-}: AvatarProps) => {
+export const Avatar = ({ children, onSignOut, user, ...rest }: AvatarProps) => {
   const { mode, toggleColorMode } = useColorMode();
   const isDark = mode === 'dark';
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -106,7 +96,7 @@ export const Avatar = ({
         '&:hover': {
           borderColor: 'secondary.main',
           borderRadius: '50%',
-        }
+        },
       }}
     >
       <MuiAvatar
@@ -126,106 +116,108 @@ export const Avatar = ({
           }}
         />
       </MuiAvatar>
-        <Popper
-          anchorEl={anchorEl}
-          open={open}
-          transition
-          sx={{
-            zIndex: ({ zIndex }) => zIndex.appBar + 1,
-          }}
-        >
-          {({ TransitionProps }) => (
-            <ClickAwayListener
-              onClickAway={handleClose}
+      <Popper
+        anchorEl={anchorEl}
+        open={open}
+        transition
+        sx={{
+          zIndex: ({ zIndex }) => zIndex.appBar + 1,
+        }}
+      >
+        {({ TransitionProps }) => (
+          <ClickAwayListener onClickAway={handleClose}>
+            <Grow
+              {...TransitionProps}
+              timeout={350}
             >
-              <Grow {...TransitionProps} timeout={350}>
-                <Paper
-                  elevation={3}
-                  sx={{
-                    background: 'linear-gradient(151deg, rgba(82,196,255) 0%, rgba(56,135,254) 27%, rgba(63,76,118) 100%)',
-                    bgcolor: 'secondary.main',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    m: 2,
-                    mt: '30px',
-                    width: 300,
-                  }}
-                >
-                  {user?.email && (
-                    <Box
-                      alignItems='center'
-                      display='flex'
-                      height={120}
-                      justifyContent='center'
-                      p={2}
-                      mt={2}
+              <Paper
+                elevation={3}
+                sx={{
+                  background:
+                    'linear-gradient(151deg, rgba(82,196,255) 0%, rgba(56,135,254) 27%, rgba(63,76,118) 100%)',
+                  bgcolor: 'secondary.main',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  m: 2,
+                  mt: '30px',
+                  width: 300,
+                }}
+              >
+                {user?.email && (
+                  <Box
+                    alignItems='center'
+                    display='flex'
+                    height={120}
+                    justifyContent='center'
+                    p={2}
+                    mt={2}
+                  >
+                    <Typography
+                      color='secondary.contrastText'
+                      sx={{
+                        wordWrap: 'break-word',
+                        wordBreak: 'break-word',
+                      }}
                     >
-                      <Typography
-                        color='secondary.contrastText'
+                      {getGreetingByTimezone()}, {user.email}!
+                    </Typography>
+                  </Box>
+                )}
+                <Divider />
+                <List
+                  disablePadding
+                  sx={{ bgcolor: 'background.paper' }}
+                >
+                  {userMenu.map(({ displayName, href, icon, onClick }, index) => {
+                    const component = (
+                      <MenuItem
+                        divider
+                        key={displayName}
+                        onClick={(event) => {
+                          onClick?.(event);
+                          handleClose();
+                        }}
                         sx={{
-                          wordWrap: 'break-word',
-                          wordBreak: 'break-word',
+                          '&:last-of-type': {
+                            borderBottom: 'none',
+                          },
                         }}
                       >
-                        {getGreetingByTimezone()}, {user.email}!
-                      </Typography>
-                    </Box>
-                  )}
-                  <Divider />
-                  <List
-                    disablePadding
-                    sx={{ bgcolor: 'background.paper' }}
-                  >
-                    {userMenu.map(({ displayName, href, icon, onClick }, index) => {
-                      const component = (
-                        <MenuItem
-                          divider
+                        {icon && (
+                          <ListItemIcon>
+                            <Icon
+                              icon={icon}
+                              sx={{
+                                fontSize: 14,
+                              }}
+                            />
+                          </ListItemIcon>
+                        )}
+                        {displayName}
+                      </MenuItem>
+                    );
+
+                    if (href) {
+                      return (
+                        <Link
+                          color='text.primary'
+                          href={href}
                           key={displayName}
-                          onClick={(event) => {
-                            onClick?.(event);
-                            handleClose();
-                          }}
-                          sx={{
-                            '&:last-of-type': {
-                              borderBottom: 'none',
-                            },
-                          }}
+                          underline='none'
                         >
-                          {icon && (
-                            <ListItemIcon>
-                              <Icon
-                                icon={icon}
-                                sx={{
-                                  fontSize: 14,
-                                }}
-                              />
-                            </ListItemIcon>
-                          )}
-                          {displayName}
-                        </MenuItem>
-                      )
+                          {component}
+                        </Link>
+                      );
+                    }
 
-                      if (href) {
-                        return (
-                          <Link
-                            color='text.primary'
-                            href={href}
-                            key={displayName}
-                            underline='none'
-                          >
-                            {component}
-                          </Link>
-                        );
-                      }
-
-                      return component;
-                    })}
-                  </List>
-                </Paper>
-              </Grow>
-            </ClickAwayListener>
-          )}
-        </Popper>
+                    return component;
+                  })}
+                </List>
+              </Paper>
+            </Grow>
+          </ClickAwayListener>
+        )}
+      </Popper>
     </Box>
   );
 };

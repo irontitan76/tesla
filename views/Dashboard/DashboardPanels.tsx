@@ -1,15 +1,7 @@
 'use client';
 
 import { faArrowProgress, faIndustry } from '@fortawesome/sharp-light-svg-icons';
-import {
-  Box,
-  Card,
-  CardContent,
-  Grid,
-  Link,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Card, CardContent, Grid, Link, Stack, Typography } from '@mui/material';
 import { Icon } from 'components/Icon';
 import { supabase } from 'database/client';
 import { useEffect, useState } from 'react';
@@ -72,7 +64,6 @@ export const DashboardPanels = () => {
                 p={3}
                 height={64}
                 width={64}
-
               >
                 <Icon
                   icon={icon}
@@ -122,7 +113,7 @@ export const DashboardPanels = () => {
             sx={{
               bgcolor: 'unset',
               border: '1px solid',
-              borderColor:'divider',
+              borderColor: 'divider',
               p: 1,
             }}
           >

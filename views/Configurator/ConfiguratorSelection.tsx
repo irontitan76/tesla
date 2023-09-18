@@ -45,7 +45,7 @@ export const ConfiguratorSelection = ({
         px={2}
         py={1}
         sx={{
-          cursor: 'pointer'
+          cursor: 'pointer',
         }}
         width='100%'
       >
@@ -54,17 +54,11 @@ export const ConfiguratorSelection = ({
           direction='row'
           spacing={1}
         >
-          <Typography>
-            {device.name}
-          </Typography>
+          <Typography>{device.name}</Typography>
           {children}
         </Stack>
         <Stack>
-          {!!device.cost && (
-            <Typography>
-              {`$${device.cost.toLocaleString()}`}
-            </Typography>
-          )}
+          {!!device.cost && <Typography>{`$${device.cost.toLocaleString()}`}</Typography>}
           <Typography
             color='text.secondary'
             fontSize={12}
@@ -92,7 +86,7 @@ export const ConfiguratorSelection = ({
             size='small'
             sx={{
               '&.Mui-disabled svg': {
-                color: 'grey.800'
+                color: 'grey.800',
               },
             }}
           >

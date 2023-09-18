@@ -1,5 +1,5 @@
-import { Components } from "@mui/material";
-import { background, text } from "./palette";
+import { Components } from '@mui/material';
+import { background, text } from './palette';
 
 export const MuiCard: Components['MuiCard'] = {
   styleOverrides: {
@@ -14,7 +14,7 @@ export const MuiTooltip: Components['MuiTooltip'] = {
     tooltip: {
       backgroundColor: background.paper,
       color: text.primary,
-    }
+    },
   },
 };
 

@@ -9,13 +9,15 @@ export const metadata = {
 
 export const About = async () => {
   const supabase = createServerSupabaseClient();
-  const { data: { session }} = await supabase.auth.getSession();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   if (!session) {
     redirect('/auth/signin');
   }
 
-  const res = await fetch('https://raw.githubusercontent.com/irontitan76/tesla/main/README.md')
+  const res = await fetch('https://raw.githubusercontent.com/irontitan76/tesla/main/README.md');
   const markdown = await res.text();
 
   return (

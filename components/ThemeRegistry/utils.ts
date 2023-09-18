@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  Dispatch,
-  SetStateAction,
-  useMemo,
-} from 'react';
+import { Dispatch, SetStateAction, useMemo } from 'react';
 import { Cookies } from 'react-cookie';
 import { themeDark } from 'themes/dark';
 import { themeLight } from 'themes/light';
@@ -15,47 +11,49 @@ export const colorModeStorageKey = 'FUSION_COLOR_MODE';
 
 export const useGetColorMode = (
   mode: ColorModeValues,
-  setMode: Dispatch<SetStateAction<ColorModeValues>>,
-) => useMemo(() => {
-  const cookies = new Cookies();
+  setMode: Dispatch<SetStateAction<ColorModeValues>>
+) =>
+  useMemo(() => {
+    const cookies = new Cookies();
 
-  return {
-    mode,
-    selectColorMode: (mode: ColorModeValues) => {
-      if (typeof window !== 'undefined') {
-        cookies.set(colorModeStorageKey, mode);
-      }
-
-      setMode(mode);
-    },
-    toggleColorMode: () => {
-      setMode((prev) => {
-        const nextMode = {
-          [teslaDark]: teslaLight,
-          [teslaLight]: teslaDark,
-        }[prev];
-
+    return {
+      mode,
+      selectColorMode: (mode: ColorModeValues) => {
         if (typeof window !== 'undefined') {
-          cookies.set(colorModeStorageKey, nextMode);
+          cookies.set(colorModeStorageKey, mode);
         }
 
-        return nextMode;
-      });
-    },
-  };
-}, [mode, setMode]);
+        setMode(mode);
+      },
+      toggleColorMode: () => {
+        setMode((prev) => {
+          const nextMode = {
+            [teslaDark]: teslaLight,
+            [teslaLight]: teslaDark,
+          }[prev];
 
-export const useGetTheme = (mode: ColorModeValues) => useMemo(() => {
-  const cookies = new Cookies();
+          if (typeof window !== 'undefined') {
+            cookies.set(colorModeStorageKey, nextMode);
+          }
 
-  const themes = {
-    [teslaDark]: themeDark,
-    [teslaLight]: themeLight,
-  };
+          return nextMode;
+        });
+      },
+    };
+  }, [mode, setMode]);
 
-  const storedMode = typeof window !== 'undefined' && cookies.get(colorModeStorageKey);
+export const useGetTheme = (mode: ColorModeValues) =>
+  useMemo(() => {
+    const cookies = new Cookies();
 
-  return !!storedMode && Object.keys(themes).includes(storedMode)
-    ? themes[storedMode]
-    : themes[mode];
-}, [mode]);
+    const themes = {
+      [teslaDark]: themeDark,
+      [teslaLight]: themeLight,
+    };
+
+    const storedMode = typeof window !== 'undefined' && cookies.get(colorModeStorageKey);
+
+    return !!storedMode && Object.keys(themes).includes(storedMode)
+      ? themes[storedMode]
+      : themes[mode];
+  }, [mode]);

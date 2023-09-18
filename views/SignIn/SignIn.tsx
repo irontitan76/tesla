@@ -8,15 +8,15 @@ export const metadata = {
 
 export const SignIn = async () => {
   const supabase = createServerSupabaseClient();
-  const { data: { session }} = await supabase.auth.getSession();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   if (session) {
     redirect('/');
   }
 
-  return (
-    <SignInContents />
-  );
+  return <SignInContents />;
 };
 
 export default SignIn;

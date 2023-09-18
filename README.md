@@ -9,7 +9,7 @@ The following sections describe how to get started with this application as well
 ## Highlights
 
 1. **Themes**: light and dark can be toggled via the ThemeSelector component found in the User Menu for protected routes or at the bottom of unprotected routes.
-2. **3D Visualizations": The configurator layout has a 3D option that uses three.js under the hood to better visualize the layout. Note that this is a beta preview and the 2D version has all requirements met.
+2. \*\*3D Visualizations": The configurator layout has a 3D option that uses three.js under the hood to better visualize the layout. Note that this is a beta preview and the 2D version has all requirements met.
 3. **About View**: This renders this README.md to the screen using MDX.
 4. **Devices View**: This makes a request to Supabase for all devices (batteries and transformers) and renders them into a virtualized list.
 5. **Configurations View**: This makes a request to Supabase for all configurations, or layouts, and renders them into a virtualized list.
@@ -22,7 +22,7 @@ The following sections describe how to get started with this application as well
 
 Find out below how to get started in a local development environment as well as accessing the deployed application [here](https://tesla.rosssheppard.com).
 
-### Local Development 
+### Local Development
 
 1. Clone this repository to your local machine.
 2. For local development, enter `pnpm install && nx serve nexus`.
@@ -35,10 +35,10 @@ Find out below how to get started in a local development environment as well as 
 2. Access the platform by registering a new account or using the demo account:
    1. Email Address: `nikola@tesla.com`
    2. Password: `magnets`
-   
+
 ## Clarifications
 
-1. The specification stated "Assume that for every 2 industrial batteries bought 1 transformer is needed." 
+1. The specification stated "Assume that for every 2 industrial batteries bought 1 transformer is needed."
    - **Clarification**: Is a transformer required even when a single battery is purchased?
    - **Interpretation**: A transformer is added for a single battery and subsequently for every multiple of two batteries.
 2. Again, the specification stated "Assume that for every 2 industrial batteries bought 1 transformer is needed."
@@ -87,29 +87,28 @@ I chose a flattened mono-repository for scalability and organizational reasons. 
 
 - Applications (`/apps`):
   - Deployable targets primarily consisting of views.
-  
 - Assets (`/assets`):
   - Icon, illustration, image, and font files consumed throughout the repository.
-  
 - Components (`/components`):
   - Reusable renderable functions that are thought of mapping 1-to-1 to a unified design system.
-  
-- Database (`/database`): 
+- Database (`/database`):
+
   - Store common database clients, APIs, types, and more.
 
 - Docs (`/docs`):
+
   - A centralized location for storing API documentation, developer guides, and user manuals. These files could be parsed and rendered into a internal or external documentation website. The centralized and top-level location helps technical writers find what they need more readily.
 
 - Themes (`/themes`):
+
   - Source of truth for design system definitions and component overrides. Leverage theme overrides as much as possible instead of instance-based changes, when relevant.
 
 - Utils (`/utils`):
   - Common functions for manipulating, normalizing, and calculating data
-  
 - Views (`/views`):
   - A rendered route comprising components.
 
-> Note: This structure can be broken down more into more granular concerns such as `containers`, which could be seen as business-aware sections of a `view`, whereas `components` are purely presentational and unware of business logic. In this case, these `containers` are separate files within `views`. 
+> Note: This structure can be broken down more into more granular concerns such as `containers`, which could be seen as business-aware sections of a `view`, whereas `components` are purely presentational and unware of business logic. In this case, these `containers` are separate files within `views`.
 
 ## Areas of Improvement
 
@@ -130,6 +129,3 @@ Obviously, given only three days of development, there are ample opportunities f
    1. While this may be more of an application for landscape orientations, a mobile-friendly version can easily be iterated on.
 5. **Accessibility**:
    1. Accessibility was not focused on for this project.
-
-
-

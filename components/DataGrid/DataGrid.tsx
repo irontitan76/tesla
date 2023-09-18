@@ -67,7 +67,7 @@ export const DataGrid = ({
         icon={value.icon}
         sx={{
           fontSize: 15,
-          ...value?.sx
+          ...value?.sx,
         }}
       />
     );

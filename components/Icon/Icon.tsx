@@ -4,13 +4,9 @@ import { forwardRef } from 'react';
 
 export interface IconProps extends SvgIconProps {
   icon: IconDefinition;
-};
+}
 
-export const Icon = forwardRef<SVGSVGElement, IconProps>(({
-  icon,
-  sx,
-  ...rest
-}, ref) => {
+export const Icon = forwardRef<SVGSVGElement, IconProps>(({ icon, sx, ...rest }, ref) => {
   const {
     icon: [width, height, , , svgPathData],
   } = icon;

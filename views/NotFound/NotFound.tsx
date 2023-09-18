@@ -5,9 +5,7 @@ export const metadata = {
 };
 
 export const NotFound = () => {
-  return (
-    <NotFoundContents />
-  );
+  return <NotFoundContents />;
 };
 
 export default NotFound;

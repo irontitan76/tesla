@@ -49,8 +49,6 @@ const items = [
   },
 ];
 
-export default async function RootLayout({ children }: { children: ReactNode}) {
-  return (
-    <Layout side={{ items: items }}>{children}</Layout>
-  );
-};
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  return <Layout side={{ items: items }}>{children}</Layout>;
+}

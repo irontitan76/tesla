@@ -13,10 +13,7 @@ export interface DataGridToolbarProps {
   title?: ReactNode;
 }
 
-export const DataGridToolbar = ({
-  title,
-  ...rest
-}: DataGridToolbarProps) => {
+export const DataGridToolbar = ({ title, ...rest }: DataGridToolbarProps) => {
   return (
     <Toolbar
       disableGutters
@@ -44,14 +41,10 @@ export const DataGridToolbar = ({
             <GridToolbarQuickFilter
               color='secondary'
               InputProps={{
-                startAdornment: (
-                  <FontAwesomeIcon
-                    icon={faSearch}
-                  />
-                ),
+                startAdornment: <FontAwesomeIcon icon={faSearch} />,
                 sx: {
                   height: 32,
-                }
+                },
               }}
               size='small'
               sx={{

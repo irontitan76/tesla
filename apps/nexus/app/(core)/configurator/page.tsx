@@ -1,4 +1,1 @@
-export {
-  Configurator as default,
-  metadata,
-} from 'views/Configurator';
+export { Configurator as default, metadata } from 'views/Configurator';

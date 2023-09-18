@@ -6,16 +6,17 @@ export const metadata = {
   title: 'Configurator',
 };
 
-export const Configurator = async () => {  const supabase = createServerSupabaseClient();
-  const { data: { session }} = await supabase.auth.getSession();
+export const Configurator = async () => {
+  const supabase = createServerSupabaseClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   if (!session) {
     redirect('/auth/signin');
   }
 
-  return (
-    <ConfiguratorContent />
-  );
+  return <ConfiguratorContent />;
 };
 
 export default Configurator;

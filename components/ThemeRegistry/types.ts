@@ -3,10 +3,7 @@ export const ColorMode = {
   teslaLight: 'light',
 };
 
-export const {
-  teslaDark,
-  teslaLight,
-} = ColorMode;
+export const { teslaDark, teslaLight } = ColorMode;
 
 export type ColorModeKeys = keyof typeof ColorMode;
-export type ColorModeValues = typeof ColorMode[ColorModeKeys];
+export type ColorModeValues = (typeof ColorMode)[ColorModeKeys];

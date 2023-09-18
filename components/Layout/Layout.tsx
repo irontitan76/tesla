@@ -10,10 +10,7 @@ export interface LayoutProps {
   side?: LayoutSideProps;
 }
 
-export const Layout = async ({
-  children,
-  side = { items: [] },
-}: LayoutProps) => {
+export const Layout = async ({ children, side = { items: [] } }: LayoutProps) => {
   return (
     <Box display='flex'>
       <LayoutTop />

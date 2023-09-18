@@ -30,37 +30,40 @@ export const ConfiguratorSelector = ({
   return (
     <Stack>
       <Heading>Batteries</Heading>
-      <Typography mb={2} variant='subtitle2'>
+      <Typography
+        mb={2}
+        variant='subtitle2'
+      >
         Select the batteries you would like to add to your layout.
       </Typography>
       <List>
-        {batteries.map((device, index) => device ? (
-          <ConfiguratorSelection
-            configuration={configuration}
-            count={count?.[device.id] ?? 0}
-            device={device}
-            key={device.name + index}
-            onAdd={onAdd}
-            onRemove={onRemove}
-          />
-        ): null)}
-          <ConfiguratorSelection
-            count={configuration?.totalTransformers ?? 0}
-            device={transformer}
-            showControls={false}
-          >
-            <Tooltip
-              title='One transformer is needed for every two industrial batteries you order.'
-            >
-              <Icon
-                icon={faInfoCircle}
-                sx={{
-                  color: 'grey.500',
-                  fontSize: 14,
-                }}
-              />
-            </Tooltip>
-          </ConfiguratorSelection>
+        {batteries.map((device, index) =>
+          device ? (
+            <ConfiguratorSelection
+              configuration={configuration}
+              count={count?.[device.id] ?? 0}
+              device={device}
+              key={device.name + index}
+              onAdd={onAdd}
+              onRemove={onRemove}
+            />
+          ) : null
+        )}
+        <ConfiguratorSelection
+          count={configuration?.totalTransformers ?? 0}
+          device={transformer}
+          showControls={false}
+        >
+          <Tooltip title='One transformer is needed for every two industrial batteries you order.'>
+            <Icon
+              icon={faInfoCircle}
+              sx={{
+                color: 'grey.500',
+                fontSize: 14,
+              }}
+            />
+          </Tooltip>
+        </ConfiguratorSelection>
       </List>
     </Stack>
   );

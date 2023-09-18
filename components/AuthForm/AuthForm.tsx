@@ -1,4 +1,4 @@
-import { faArrowRightFromArc } from "@fortawesome/sharp-light-svg-icons";
+import { faArrowRightFromArc } from '@fortawesome/sharp-light-svg-icons';
 import {
   Alert,
   AlertProps,
@@ -13,12 +13,11 @@ import {
   TextFieldProps,
   Theme,
   Typography,
-} from "@mui/material";
-import { AuthResponse } from "@supabase/supabase-js";
+} from '@mui/material';
+import { AuthResponse } from '@supabase/supabase-js';
 import { Icon } from 'components/Icon';
 import { Logo } from 'components/Logo';
-import { FormEvent, useState } from "react";
-
+import { FormEvent, useState } from 'react';
 
 export type AuthFormType = {
   [K in AuthFormProps<any>['fields'][number]['name']]: any;
@@ -29,15 +28,15 @@ export interface AuthAlert {
   text: string;
 }
 
-export type Field<T> = Partial<Omit<TextFieldProps, 'name'>>
-& { name: Required<TextFieldProps>['name'] } // ensure name is provided
-& T;
+export type Field<T> = Partial<Omit<TextFieldProps, 'name'>> & {
+  name: Required<TextFieldProps>['name'];
+} & T; // ensure name is provided
 
 export type AddMessage = (text: string) => void;
 
 export type OnSuccess = (
   form: AuthFormType,
-  event: FormEvent<HTMLFormElement>,
+  event: FormEvent<HTMLFormElement>
 ) => Promise<AuthResponse>;
 
 export type OnValidate = ({
@@ -47,11 +46,11 @@ export type OnValidate = ({
   addWarning,
   form,
 }: {
-  addError: AddMessage,
-  addInfo: AddMessage,
-  addSuccess: AddMessage,
-  addWarning: AddMessage,
-  form: AuthFormType,
+  addError: AddMessage;
+  addInfo: AddMessage;
+  addSuccess: AddMessage;
+  addWarning: AddMessage;
+  form: AuthFormType;
 }) => boolean;
 
 // TODO: update "any" function types below
@@ -83,7 +82,8 @@ export const AuthForm = <T,>({
     fields.reduce((prev, curr) => {
       prev[curr.name] = curr.value;
       return prev;
-    }, {} as { [key: string]: unknown }));
+    }, {} as { [key: string]: unknown })
+  );
 
   const handleChange: TextFieldProps['onChange'] = (event) => {
     setForm({
@@ -157,7 +157,7 @@ export const AuthForm = <T,>({
       value={value}
       {...rest}
     />
-  ))
+  ));
 
   return (
     <>
@@ -191,12 +191,12 @@ export const AuthForm = <T,>({
           <Button
             disabled={!!fields.filter((field) => field.required && !form[field.name]).length}
             fullWidth
-            startIcon={(
+            startIcon={
               <Icon
                 icon={faArrowRightFromArc}
                 sx={{ color: 'inherit' }}
               />
-             )}
+            }
             sx={{
               bgcolor: 'transparent',
               color: 'text.primary',

@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
   displayName: 'nexus',
-  preset: '../../jest.preset.js',
+  preset: '../../configs/src/jest/jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/next/babel'] }],

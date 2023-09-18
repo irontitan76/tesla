@@ -12,12 +12,12 @@ export const NotFoundContents = () => {
         color: '#666666',
         el: '#vanta-container',
         gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
+        minHeight: 200.0,
+        minWidth: 200.0,
         mouseControls: true,
         touchControls: true,
-        scale: 1.00,
-        scaleMobile: 1.00,
+        scale: 1.0,
+        scaleMobile: 1.0,
       });
     }
   };
@@ -54,7 +54,7 @@ export const NotFoundContents = () => {
               bgcolor: 'grey.700',
               '&:hover': {
                 bgcolor: 'grey.900',
-              }
+              },
             }}
           >
             Go Home

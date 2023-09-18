@@ -1,14 +1,7 @@
 'use client';
 
 import { faCloudArrowDown } from '@fortawesome/sharp-light-svg-icons';
-import {
-  Button,
-  Drawer,
-  Grid,
-  List,
-  Toolbar,
-  useTheme,
-} from '@mui/material';
+import { Button, Drawer, Grid, List, Toolbar, useTheme } from '@mui/material';
 import { useState } from 'react';
 import { LayoutSideItem, LayoutSideItemProps } from './LayoutSideItem';
 import { closedMixin, openedMixin } from './drawer';
@@ -19,9 +12,7 @@ export interface LayoutSideProps {
   items?: LayoutSideItemProps[];
 }
 
-export const LayoutSide = ({
-  items = []
-}: LayoutSideProps) => {
+export const LayoutSide = ({ items = [] }: LayoutSideProps) => {
   const theme = useTheme();
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 

@@ -16,21 +16,16 @@ export const ConfigurationsContent = ({}: ConfigurationsContentProps) => {
 
   useEffect(() => {
     const fetchConfiguration = async () => {
-      const { data: configurations } = await supabase
-        .from('configurations')
-        .select();
+      const { data: configurations } = await supabase.from('configurations').select();
 
+      const { data: batteries } = await supabase.from('batteries').select();
 
-      const { data: batteries } = await supabase
-        .from('batteries')
-        .select();
-
-        setBatteries(batteries ?? []);
-        setConfigurations(configurations ?? []);
+      setBatteries(batteries ?? []);
+      setConfigurations(configurations ?? []);
     };
 
     fetchConfiguration();
-  }, [])
+  }, []);
 
   const columns = [
     {
@@ -92,7 +87,7 @@ export const ConfigurationsContent = ({}: ConfigurationsContentProps) => {
               {row.items.map((item: any) => {
                 const battery = batteries.find((battery) => battery.id === item);
 
-                return(
+                return (
                   <ListItem
                     key={battery?.name}
                     sx={{

@@ -15,7 +15,9 @@ export const SignInForm = ({ session }: any) => {
   };
 
   const handleSuccess = async () => {
-    const { data: { session }} = await supabase.auth.getSession();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
     if (session) {
       router.refresh();
@@ -36,7 +38,7 @@ export const SignInForm = ({ session }: any) => {
           name: 'password',
           required: true,
           type: 'password',
-        }
+        },
       ]}
       linkText='Or Sign Up'
       linkHref='/auth/signup'

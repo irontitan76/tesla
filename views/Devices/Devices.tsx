@@ -6,16 +6,17 @@ export const metadata = {
   title: 'Devices',
 };
 
-export const Devices = async () => {  const supabase = createServerSupabaseClient();
-  const { data: { session }} = await supabase.auth.getSession();
+export const Devices = async () => {
+  const supabase = createServerSupabaseClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   if (!session) {
     redirect('/auth/signin');
   }
 
-  return (
-    <DevicesContent />
-  );
+  return <DevicesContent />;
 };
 
 export default Devices;

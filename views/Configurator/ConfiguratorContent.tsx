@@ -44,31 +44,21 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
   const isVertical = orientation === 'vertical';
 
   const fetchConfiguratorInformation = async () => {
-    const { data: batteries } = await supabase
-      .from('batteries')
-      .select();
-
-    const { data: configurations } = await supabase
-      .from('configurations')
-      .select();
-
-    const { data: transformers } = await supabase
-      .from('transformers')
-      .select()
-      .eq('id', 1);
+    const { data: batteries } = await supabase.from('batteries').select();
+    const { data: configurations } = await supabase.from('configurations').select();
+    const { data: transformers } = await supabase.from('transformers').select().eq('id', 1);
 
     setBatteries(batteries || []);
     setConfigurations(configurations || []);
     setTransformers(transformers || []);
   };
 
-  const foundConfiguration = configurations?.find((config) => (
-    config.id === parseInt(configurationId ?? '')
-  ));
+  const foundConfiguration = configurations?.find(
+    (config) => config.id === parseInt(configurationId ?? '')
+  );
 
-  const configuration = !!configurations?.length && foundConfiguration
-    ? foundConfiguration
-    : defaultConfiguration;
+  const configuration =
+    !!configurations?.length && foundConfiguration ? foundConfiguration : defaultConfiguration;
 
   useEffect(() => {
     fetchConfiguratorInformation();
@@ -76,7 +66,7 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
 
   const handleAddBattery = (battery: Device) => async () => {
     const items = configuration?.items ?? [];
-    const newItems = [...items ?? [], battery.id];
+    const newItems = [...(items ?? []), battery.id];
     const newTotal = calculateTotal(newItems, batteries);
 
     const newConfiguration = {
@@ -85,13 +75,10 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
     };
 
     if (configurationId === 'new') {
-      const { data } = await supabase
-        .from('configurations')
-        .insert(newConfiguration)
-        .select();
+      const { data } = await supabase.from('configurations').insert(newConfiguration).select();
 
       setConfigurationId(data?.[0].id.toString() ?? 'new');
-      setConfigurations([...configurations ?? [], ...data ?? []]);
+      setConfigurations([...(configurations ?? []), ...(data ?? [])]);
     } else {
       await supabase
         .from('configurations')
@@ -99,9 +86,7 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
         .match({ id: configurationId })
         .select();
 
-      const { data } = await supabase
-        .from('configurations')
-        .select();
+      const { data } = await supabase.from('configurations').select();
 
       setConfigurations(data ?? []);
     }
@@ -116,7 +101,7 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
     const udpatedConfiguration = {
       items: updatedItems,
       ...updatedTotal,
-    }
+    };
 
     const { data } = await supabase
       .from('configurations')
@@ -141,7 +126,10 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
       justifyContent='space-between'
       spacing={4}
     >
-      <Grid item xs={12}>
+      <Grid
+        item
+        xs={12}
+      >
         <Stack
           alignItems='center'
           borderBottom='1px solid'
@@ -198,19 +186,17 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
               size='small'
               value={configurationId ?? 'new'}
             >
-              <MenuItem
-                value='new'
-              >
-                New
-              </MenuItem>
-              {configurations?.sort((a, b) => a.id - b.id).map((config) => (
-                <MenuItem
-                  key={config.id}
-                  value={config.id}
-                >
-                  {config.id}
-                </MenuItem>
-              ))}
+              <MenuItem value='new'>New</MenuItem>
+              {configurations
+                ?.sort((a, b) => a.id - b.id)
+                .map((config) => (
+                  <MenuItem
+                    key={config.id}
+                    value={config.id}
+                  >
+                    {config.id}
+                  </MenuItem>
+                ))}
             </TextField>
           </Stack>
         </Stack>
@@ -231,17 +217,19 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
       <Grid
         item
         py={2}
-        {...isVertical ? {
-          height: 'calc(100vh - 190px)',
-          md: 6,
-          sx: { overflowY: { lg: 'scroll' } },
-          lg: 4,
-          xs: 12,
-        } : {
-          md: 6,
-          lg: 6,
-          xs: 12,
-        }}
+        {...(isVertical
+          ? {
+              height: 'calc(100vh - 190px)',
+              md: 6,
+              sx: { overflowY: { lg: 'scroll' } },
+              lg: 4,
+              xs: 12,
+            }
+          : {
+              md: 6,
+              lg: 6,
+              xs: 12,
+            })}
       >
         <ConfiguratorSelector
           batteries={batteries}
@@ -253,9 +241,7 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
         {isVertical && (
           <>
             <Divider />
-            <ConfiguratorSummary
-              configuration={configuration}
-            />
+            <ConfiguratorSummary configuration={configuration} />
           </>
         )}
       </Grid>
@@ -266,9 +252,7 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
           xl={6}
           xs={12}
         >
-          <ConfiguratorSummary
-            configuration={configuration}
-          />
+          <ConfiguratorSummary configuration={configuration} />
         </Grid>
       )}
     </Grid>

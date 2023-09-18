@@ -3,9 +3,16 @@ import NextLink, { LinkProps } from 'next/link';
 import { forwardRef, Ref } from 'react';
 import { palette, secondary } from './palette';
 
-export const LinkBehavior = forwardRef((props: LinkProps, ref: Ref<HTMLAnchorElement> | undefined) => {
-  return <NextLink ref={ref} {...props} />;
-});
+export const LinkBehavior = forwardRef(
+  (props: LinkProps, ref: Ref<HTMLAnchorElement> | undefined) => {
+    return (
+      <NextLink
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
 
 export const MuiAvatar: Components['MuiAvatar'] = {
   styleOverrides: {
@@ -64,7 +71,7 @@ export const MuiIconButton: Components['MuiIconButton'] = {
 export const MuiLink: Components['MuiLink'] = {
   defaultProps: {
     component: LinkBehavior,
-  }
+  },
 };
 
 export const MuiMenuItem: Components['MuiMenuItem'] = {

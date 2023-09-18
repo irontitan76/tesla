@@ -16,11 +16,11 @@ export const DevicesContent = ({}: DevicesContentProps) => {
       const { data: batteries } = await supabase.from('batteries').select();
       const { data: transformers } = await supabase.from('transformers').select();
 
-      setDevices([...batteries ?? [], ...transformers ?? []]);
+      setDevices([...(batteries ?? []), ...(transformers ?? [])]);
     };
 
     fetchConfiguration();
-  }, [])
+  }, []);
 
   const columns = [
     {

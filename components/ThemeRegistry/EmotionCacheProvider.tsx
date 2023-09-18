@@ -94,11 +94,5 @@ export default function EmotionCacheProvider({
     );
   });
 
-  return (
-    <CacheProvider
-      value={registry.cache}
-    >
-      {children}
-    </CacheProvider>
-  );
+  return <CacheProvider value={registry.cache}>{children}</CacheProvider>;
 }

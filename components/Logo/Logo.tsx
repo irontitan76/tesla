@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  Link,
-  LinkProps,
-  useTheme,
-} from '@mui/material';
+import { Link, LinkProps, useTheme } from '@mui/material';
 import { ReactComponent as TeslaLogoDark } from 'assets/logos/tesla_dark.svg';
 import { ReactComponent as TeslaLogoLight } from 'assets/logos/tesla_light.svg';
 import { SVGProps } from 'react';
@@ -14,11 +10,7 @@ export interface LogoProps extends SVGProps<SVGSVGElement> {
   sx?: LinkProps['sx'];
 }
 
-export const Logo = ({
-  LinkProps,
-  sx,
-  ...rest
-}: LogoProps) => {
+export const Logo = ({ LinkProps, sx, ...rest }: LogoProps) => {
   const { palette } = useTheme();
   const Logo = palette.mode == 'dark' ? TeslaLogoLight : TeslaLogoDark;
 

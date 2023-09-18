@@ -1,4 +1,1 @@
-export {
-  About as default,
-  metadata,
-} from 'views/About';
+export { About as default, metadata } from 'views/About';
