@@ -34,11 +34,12 @@ export const ConfiguratorSelector = ({
         Select the batteries you would like to add to your layout.
       </Typography>
       <List>
-        {batteries.map((device) => device ? (
+        {batteries.map((device, index) => device ? (
           <ConfiguratorSelection
             configuration={configuration}
             count={count?.[device.id] ?? 0}
             device={device}
+            key={device.name + index}
             onAdd={onAdd}
             onRemove={onRemove}
           />

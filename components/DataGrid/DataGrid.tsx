@@ -79,7 +79,9 @@ export const DataGrid = ({
     <Stack
       borderRadius={2}
       display='flex'
-      height='calc(100vh - 96px)'
+      height={{
+        lg: 'calc(100vh - 96px)',
+      }}
       width='100%'
     >
       <DataGridPremium

@@ -2,9 +2,12 @@
 
 import { AuthForm, AuthFormType, OnValidate } from 'components/AuthForm';
 import { supabase } from 'database/client';
+import { useRouter } from 'next/navigation';
 
 
 export const SignUpForm = () => {
+  const router = useRouter();
+
   const handleSubmit = async (form: AuthFormType) => {
     return supabase.auth.signUp({
       email: form.email,
@@ -13,6 +16,14 @@ export const SignUpForm = () => {
         emailRedirectTo: `${location.origin}/auth/callback`,
       },
     });
+  };
+
+  const handleSuccess = async () => {
+    const { data: { session }} = await supabase.auth.getSession();
+
+    if (session) {
+      router.push('/');
+    }
   };
 
   const handleValidate: OnValidate = ({
@@ -52,6 +63,7 @@ export const SignUpForm = () => {
       linkText='Or Sign In'
       linkHref='/auth/signin'
       onSubmit={handleSubmit}
+      onSuccess={handleSuccess}
       onValidate={handleValidate}
       pushTo='/'
       submitText='Sign Up'

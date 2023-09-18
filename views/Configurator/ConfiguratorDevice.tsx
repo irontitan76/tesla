@@ -63,6 +63,6 @@ export const ConfiguratorCanvas = ({ children }: ConfiguratorCanvas) => {
       />
       {children}
       <TrackballControls />
-  </Canvas>
+    </Canvas>
   );
 };

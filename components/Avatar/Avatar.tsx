@@ -100,9 +100,6 @@ export const Avatar = ({
 
   return (
     <Box
-      // Box from @react-three/drei and @mui/material are somehow
-      // augmenting types wrongly
-      // @ts-expect-error — TODO: fix
       border='2px solid transparent'
       p={0.9}
       sx={{

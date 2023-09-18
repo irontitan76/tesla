@@ -52,7 +52,8 @@ export const DashboardPanels = () => {
         <Grid
           item
           key={displayName}
-          md={4}
+          md={6}
+          lg={4}
           xs={12}
         >
           <Card elevation={0}>
@@ -63,9 +64,6 @@ export const DashboardPanels = () => {
               spacing={3}
             >
               <Box
-                // Box from @react-three/drei and @mui/material are somehow
-                // augmenting types wrongly
-                // @ts-expect-error — TODO: fix
                 alignItems='center'
                 bgcolor='background.paper'
                 borderRadius='50%'
@@ -105,7 +103,8 @@ export const DashboardPanels = () => {
       ))}
       <Grid
         item
-        md={4}
+        md={6}
+        lg={4}
         xs={12}
       >
         <Link

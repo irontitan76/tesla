@@ -47,10 +47,6 @@ export const LayoutSide = ({
       open
       sx={{
         boxSizing: 'border-box',
-        display: {
-          md: 'block',
-          xs: 'none',
-        },
         flexShrink: 0,
         width: drawerWidth,
         ...(isDrawerOpen && {

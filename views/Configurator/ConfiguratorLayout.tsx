@@ -68,13 +68,14 @@ export const ConfiguratorLayout = ({
 
   return (
     <Grid
+      alignItems='center'
       container
       justifyContent='space-between'
     >
-      <Grid item xs={9}>
+      <Grid item xs={6}>
         <Heading mb={3}>Site Layout</Heading>
       </Grid>
-      <Grid item>
+      <Grid item xs={6} textAlign='right'>
         <FormControlLabel
           control={(
             <Switch
@@ -82,6 +83,7 @@ export const ConfiguratorLayout = ({
             />
           )}
           label='Enable 3D'
+          sx={{ mb: 3 }}
         />
       </Grid>
       <Grid item xs={12}>

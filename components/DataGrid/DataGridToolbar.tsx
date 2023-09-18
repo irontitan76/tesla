@@ -54,7 +54,14 @@ export const DataGridToolbar = ({
                 }
               }}
               size='small'
-              sx={{ pb: 0 }}
+              sx={{
+                display: {
+                  md: 'block',
+                  xs: 'none',
+                },
+                maxWidth: 250,
+                pb: 0,
+              }}
               variant='outlined'
             />
             <GridToolbarDensitySelector />

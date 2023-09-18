@@ -17,20 +17,26 @@ declare global {
 
 export const SignInContents = () => {
   const setVanta = () => {
-    if (window.VANTA) {
-      window.VANTA.CELLS({
-        el: '#vanta-container',
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        scale: 1.00,
-        color1: '#333333',
-        color2: '#555555',
-        size: 5.00,
-        speed: 1.50
-      });
+    try {
+      if (window.VANTA) {
+        window.VANTA.CELLS({
+          el: '#vanta-container',
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          color1: '#333333',
+          color2: '#555555',
+          size: 5.00,
+          speed: 1.50
+        });
+      }
+    } catch(error) {
+      // just render bg if there's issues
+      console.log('Are you running FireFox? The visualization is unsupported.');
+      console.log(error)
     }
   };
 

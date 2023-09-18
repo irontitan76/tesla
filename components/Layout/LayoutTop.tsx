@@ -81,7 +81,10 @@ export const LayoutTop = ({
             <Logo />
             <Typography
                 bottom={5}
-                display='inline-flex'
+                display={{
+                  md: 'inline-flex',
+                  xs: 'none',
+                }}
                 ml={2}
                 position='relative'
                 sx={{

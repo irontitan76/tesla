@@ -35,7 +35,7 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
     totalWidth: 0,
   };
 
-  const [orientation, setOrientation] = useState<ConfiguratorOrientation>('horizontal');
+  const [orientation, setOrientation] = useState<ConfiguratorOrientation>('vertical');
   const [batteries, setBatteries] = useState<Device[]>([]);
   const [transformers, setTransformers] = useState<Transformer[]>([]);
   const [configurationId, setConfigurationId] = useState<string>('new');
@@ -162,15 +162,19 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
             spacing={2}
           >
             <TextField
-              InputProps={{
-                sx: {
-                  minWidth: 200,
-                },
-              }}
               label='Orientation'
               onChange={handleOrientationChange}
               select
               size='small'
+              sx={{
+                display: {
+                  md: 'block',
+                  xs: 'none',
+                },
+                '& .MuiInput-root': {
+                  minWidth: 200,
+                },
+              }}
               value={orientation}
             >
               {['horizontal', 'vertical'].map((orient) => (
@@ -185,7 +189,7 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
             <TextField
               InputProps={{
                 sx: {
-                  minWidth: 200,
+                  minWidth: 120,
                 },
               }}
               label='Configuration ID'

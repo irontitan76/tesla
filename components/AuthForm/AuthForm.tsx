@@ -17,8 +17,7 @@ import {
 import { AuthResponse } from "@supabase/supabase-js";
 import { Icon } from 'components/Icon';
 import { Logo } from 'components/Logo';
-import { useRouter } from "next/navigation";
-import { FormEvent, SetStateAction, useState } from "react";
+import { FormEvent, useState } from "react";
 
 
 export type AuthFormType = {
@@ -76,10 +75,8 @@ export const AuthForm = <T,>({
   onSubmit,
   onSuccess,
   onValidate,
-  pushTo,
   submitText = 'Login',
 }: AuthFormProps<T>) => {
-  const router = useRouter();
   const [message, setMessage] = useState<AuthAlert>({ text: '', severity: 'info' });
 
   const [form, setForm] = useState<{ [key: string]: unknown }>(
@@ -131,10 +128,6 @@ export const AuthForm = <T,>({
 
     if (!error) {
       await onSuccess?.(data);
-
-      if (pushTo) {
-        router.push(pushTo);
-      }
     } else {
       await onError?.(error);
       setMessage({ text: error.message, severity: 'error' });
@@ -192,7 +185,7 @@ export const AuthForm = <T,>({
             textTransform='uppercase'
             variant='subtitle2'
           >
-            Industrial Design
+            Industrial Energy
           </Typography>
           {renderedFields}
           <Button

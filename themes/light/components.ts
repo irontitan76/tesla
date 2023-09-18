@@ -9,6 +9,16 @@ export const MuiCard: Components['MuiCard'] = {
   },
 };
 
+export const MuiTextField: Components['MuiTextField'] = {
+  styleOverrides: {
+    root: {
+      '& .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'unset',
+      },
+    },
+  },
+};
+
 export const MuiTooltip: Components['MuiTooltip'] = {
   styleOverrides: {
     tooltip: {
@@ -20,5 +30,6 @@ export const MuiTooltip: Components['MuiTooltip'] = {
 
 export const components = {
   MuiCard,
+  MuiTextField,
   MuiTooltip,
 };
