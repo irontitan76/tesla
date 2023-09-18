@@ -1,4 +1,3 @@
-import React from 'react';
 import { ConfiguratorContent } from './ConfiguratorContent';
 
 export const metadata = {

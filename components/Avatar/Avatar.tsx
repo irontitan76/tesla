@@ -100,10 +100,10 @@ export const Avatar = ({
 
   return (
     <Box
+      border='2px solid'
+      borderColor='transparent'
+      p={0.9}
       sx={{
-        border: '2px solid',
-        borderColor: 'transparent',
-        p: 0.9,
         '&:hover': {
           borderColor: 'secondary.main',
           borderRadius: '50%',

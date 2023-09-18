@@ -5,6 +5,7 @@ import {
   Box,
   Card,
   CardContent,
+  Container,
   Grid,
   Link,
   Stack,
@@ -12,13 +13,20 @@ import {
 } from '@mui/material';
 import { Icon } from 'components/Icon';
 import { supabase } from 'database/client';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import { useEffect, useState } from 'react';
 
 export const metadata = {
   title: 'Dashboard',
 };
 
-export const DashboardPanels = () => {
+export interface DashboardPanelsProps {
+  markdown: string;
+}
+
+export const DashboardPanels = ({
+  markdown
+}: DashboardPanelsProps) => {
   const [configurationCount, setConfigurationCount] = useState(0);
 
   useEffect(() => {
@@ -38,17 +46,22 @@ export const DashboardPanels = () => {
       count: configurationCount,
       displayName: `Configuration${configurationCount === 1 ? '' : 's'}`,
       icon: faIndustry,
-      iconColor: 'red',
     },
   ];
 
   return (
     <Grid
       container
+      height='calc(100vh - 96px)'
+      justifyContent='center'
       spacing={3}
     >
-      {metrics.map(({ count, displayName, icon, iconColor }) => (
-        <Grid item md={4} key={displayName}>
+      {metrics.map(({ count, displayName, icon }) => (
+        <Grid
+          item
+          md={4}
+          key={displayName}
+        >
           <Card elevation={0}>
             <CardContent
               alignItems='center'
@@ -71,7 +84,6 @@ export const DashboardPanels = () => {
                   icon={icon}
                   sx={{
                     height: 32,
-                    fill: iconColor,
                     width: 32,
                   }}
                 />
@@ -130,13 +142,24 @@ export const DashboardPanels = () => {
                 height={64}
                 width={64}
               >
-                <Icon
-                  icon={faArrowProgress}
-                  sx={{
-                    height: 32,
-                    width: 32,
-                  }}
-                />
+                <Box
+                  alignItems='center'
+                  bgcolor='background.paper'
+                  borderRadius='50%'
+                  display='flex'
+                  justifyContent='center'
+                  p={3}
+                  height={64}
+                  width={64}
+                >
+                  <Icon
+                    icon={faArrowProgress}
+                    sx={{
+                      height: 32,
+                      width: 32,
+                    }}
+                  />
+                </Box>
               </Box>
               <Box>
                 <Typography
@@ -150,6 +173,36 @@ export const DashboardPanels = () => {
           </Card>
         </Link>
       </Grid>
+      {markdown && (
+        <Grid
+          item
+          xs={12}
+        >
+          <Container maxWidth='md'>
+            <Box
+              bgcolor={({ palette }) => `${palette.background.paper}20`}
+              border='1px solid'
+              borderColor='divider'
+              color='text.primary'
+              height={500}
+              px={2}
+              py={1}
+              sx={{
+                overflowY: 'auto',
+              }}
+            >
+              <MDXRemote
+                options={{
+                  mdxOptions: {
+                    development: true,
+                  },
+                }}
+                source={markdown}
+              />
+            </Box>
+          </Container>
+        </Grid>
+      )}
     </Grid>
   );
 };

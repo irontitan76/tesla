@@ -1,4 +1,3 @@
-import React from 'react';
 import { NotFoundContents } from './NotFoundContents';
 
 export const metadata = {
