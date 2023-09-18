@@ -12,7 +12,6 @@ import {
 } from '@mui/material';
 import { Icon } from 'components/Icon';
 import { supabase } from 'database/client';
-import { MDXRemote } from 'next-mdx-remote/rsc';
 import { useEffect, useState } from 'react';
 
 export const metadata = {
@@ -64,6 +63,9 @@ export const DashboardPanels = () => {
               spacing={3}
             >
               <Box
+                // Box from @react-three/drei and @mui/material are somehow
+                // augmenting types wrongly
+                // @ts-expect-error — TODO: fix
                 alignItems='center'
                 bgcolor='background.paper'
                 borderRadius='50%'
