@@ -20,6 +20,8 @@
     "@next/mdx": "^13.4.19",
     "@nx/devkit": "^16.8.1",
     "@nx/next": "16.8.1",
+    "@react-three/drei": "^9.83.9",
+    "@react-three/fiber": "^8.14.2",
     "@supabase/auth-helpers-nextjs": "^0.8.0",
     "@supabase/supabase-js": "^2.33.2",
     "@types/mdx": "^2.0.7",

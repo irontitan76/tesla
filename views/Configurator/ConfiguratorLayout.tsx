@@ -1,22 +1,27 @@
 'use client';
 
-import { faBattery, faUtilityPole } from '@fortawesome/sharp-light-svg-icons';
-import { Box, Grid, Stack, Tooltip, Typography } from '@mui/material';
+import { Box, FormControlLabel, Grid, Stack, Switch, Tooltip, Typography } from '@mui/material';
 import { Heading } from 'components/Heading';
-import { Icon } from 'components/Icon';
 import { useEffect, useState } from 'react';
-import { Device, Configuration } from 'database/objects';
+import { Device, Configuration, Transformer } from 'database/objects';
 import { supabase } from 'database/client';
+import { ConfiguratorCanvas, ConfiguratorDevice } from './ConfiguratorDevice';
+import { Icon } from 'components/Icon';
+import { faBattery, faUtilityPole } from '@fortawesome/sharp-light-svg-icons';
 
 export interface ConfiguratorLayoutProps {
   batteries: Device[];
   configuration: Configuration;
+  orientation: 'horizontal' | 'vertical';
+  transformer: Transformer;
 }
 
 export const ConfiguratorLayout = ({
   batteries,
   configuration,
+  orientation,
 }: ConfiguratorLayoutProps) => {
+  const [enable3D, setEnable3D] = useState(false);
   const [transformerConfig, setTransformerConfig] = useState<Device | null>();
 
   useEffect(() => {
@@ -57,102 +62,107 @@ export const ConfiguratorLayout = ({
     return 0;
   });
 
+  let cumulativeWidths = layoutItems.map((_, index) =>
+    layoutItems.slice(0, index).reduce((sum, item) => sum + item.width, 0)
+  );
+
   return (
-    <Stack px={2}>
-      <Grid container>
-        <Grid item xs={12}>
-          <Heading mb={0}>Site Layout</Heading>
-        </Grid>
-        {!configuration.items.length && (
-          <Grid item xs={12}>
+    <Grid
+      container
+      justifyContent='space-between'
+    >
+      <Grid item xs={9}>
+        <Heading mb={3}>Site Layout</Heading>
+      </Grid>
+      <Grid item>
+        <FormControlLabel
+          control={(
+            <Switch
+              defaultChecked
+              onChange={() => setEnable3D(!enable3D)}
+            />
+          )}
+          label='Enable 3D'
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Stack
+          alignContent='flex-start'
+          bgcolor={({ palette }) => `${palette.background.paper}30`}
+          borderBottom='2px solid'
+          borderColor='divider'
+          direction='row'
+          flexWrap='wrap'
+          height={orientation ==='vertical' ? 'calc(100vh - 285px)' : 500}
+          justifyContent='space-between'
+          gap={2}
+          p={2}
+          sx={{
+            borderTopLeftRadius: 3,
+            borderTopRightRadius: 3,
+          }}
+          width='100%'
+        >
+          {!configuration.items.length && (
             <Typography variant='subtitle2'>
               Add batteries to your configuration to see a potential layout for your site
             </Typography>
-          </Grid>
-        )}
-        {!!configuration.items.length && (
-          <>
-            <Grid item xs={11}>
-              <Stack
-                alignContent='flex-start'
-                bgcolor='background.paper'
-                borderRadius={2}
-                direction='row'
-                flexWrap='wrap'
-                justifyContent='space-between'
-                gap={2}
-                maxHeight='calc(100vh - 590px)'
-                p={2}
-                sx={{
-                  overflow: 'scroll',
-                }}
-                width='100%'
-              >
-                {layoutItems.map((item, index) => {
-                  return item ? (
-                    <Tooltip key={`${item.name}${index}`} title={item.name}>
-                      <Box
-                        alignItems='center'
-                        bgcolor='background.card'
-                        border='1px solid'
-                        borderColor='divider'
-                        borderRadius={2}
-                        display='flex'
-                        flexDirection='column'
-                        height={`calc((${item.depth} / 100) * 100%)`}
-                        gap={1}
-                        justifyContent='center'
-                        p={1}
-                        width={`calc((${item.width} / 100) * 100%)`}
-                      >
-                        <Icon
-                          icon={item.name === 'Transformer' ? faUtilityPole : faBattery}
-                        />
-                        <Typography
-                          fontSize={9}
-                        >
-                          {item.name}
-                        </Typography>
-                      </Box>
-                    </Tooltip>
-                  ) : null;
-                })}
-              </Stack>
-            </Grid>
-            <Grid item xs={1}>
-              <Stack
-                alignItems='flex-start'
-                borderLeft='1px solid'
-                borderColor='divider'
-                height='100%'
-                justifyContent='flex-end'
-              >
-                <Typography
+          )}
+          {enable3D && (
+            <ConfiguratorCanvas>
+              {layoutItems.map((item, index) => {
+                return item ? (
+                  <ConfiguratorDevice
+                    args={[item.width / 10, 2, 2]}
+                    position={[cumulativeWidths[index] / 10 + index * 1, 0, 0]}
+                    type={item.name}
+                  />
+                ): null;
+              })}
+            </ConfiguratorCanvas>
+          )}
+          {!enable3D && layoutItems.map((item, index) => {
+            return item ? (
+              <Tooltip key={`${item.name}${index}`} title={item.name}>
+                <Box
+                  alignItems='center'
+                  bgcolor='background.card'
+                  border='1px solid'
+                  borderColor='divider'
+                  borderRadius={2}
+                  display='flex'
+                  flexDirection='column'
+                  gap={1}
+                  justifyContent='center'
+                  p={1}
                   sx={{
-                    transform: 'rotate(90deg)',
+                    perspective: 800,
                   }}
                 >
-                  {`${configuration.totalDepth}ft`}
-                </Typography>
-              </Stack>
-            </Grid>
-            <Grid item xs={11}>
-              <Stack
-                borderTop='1px solid'
-                borderColor='divider'
-                direction='row'
-                justifyContent='flex-end'
-                pt={2}
-                width='100%'
-              >
-                <Typography>100ft</Typography>
-              </Stack>
-            </Grid>
-            <Grid item xs={1} />
-          </>
+                  <Icon
+                    icon={item.name === 'Transformer' ? faUtilityPole : faBattery}
+                  />
+                  <Typography
+                    fontSize={9}
+                  >
+                    {item.name}
+                  </Typography>
+                </Box>
+              </Tooltip>
+            ) : null;
+          })}
+        </Stack>
+        {!enable3D && (
+          <Typography
+            align='center'
+            p={2}
+            width='100%'
+          >
+            100ft
+          </Typography>
         )}
       </Grid>
-    </Stack>
+    </Grid>
   );
 };
 

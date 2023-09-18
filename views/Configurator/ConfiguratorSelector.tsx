@@ -1,17 +1,18 @@
 'use client';
 
-import { faMinus, faPlus } from '@fortawesome/sharp-light-svg-icons';
-import { Box, IconButton, IconButtonProps, List, ListItem, Stack, Typography } from '@mui/material';
+import { IconButtonProps, List, Stack, Tooltip, Typography } from '@mui/material';
 import { Heading } from 'components/Heading';
+import { Device, Configuration, Transformer } from 'database/objects';
+import { ConfiguratorSelection } from './ConfiguratorSelection';
 import { Icon } from 'components/Icon';
-import { Device, Configuration } from 'database/objects';
-import { getSizeString } from 'utils';
+import { faInfoCircle } from '@fortawesome/sharp-light-svg-icons';
 
 export interface ConfiguratorSelectorProps {
   batteries?: Device[];
   configuration?: Configuration;
   onAdd: (battery: Device) => IconButtonProps['onClick'];
   onRemove: (battery: Device) => IconButtonProps['onClick'];
+  transformer: Transformer;
 }
 
 export const ConfiguratorSelector = ({
@@ -19,78 +20,46 @@ export const ConfiguratorSelector = ({
   configuration,
   onAdd,
   onRemove,
+  transformer,
 }: ConfiguratorSelectorProps) => {
+  const count = configuration.items.reduce((acc, curr) => {
+    acc[curr] = (acc[curr] || 0) + 1;
+    return acc;
+  }, {});
+
   return (
-    <Stack
-      height='100%'
-      py={2}
-    >
+    <Stack>
       <Heading>Batteries</Heading>
       <Typography mb={2} variant='subtitle2'>
         Select the batteries you would like to add to your layout.
       </Typography>
       <List>
-        {batteries.map((battery) => battery ? (
-          <ListItem disableGutters key={battery.name}>
-            <Box
-              border='2px solid'
-              borderColor='divider'
-              borderRadius={2}
-              display='flex'
-              flexDirection='row'
-              justifyContent='space-between'
-              mb={1}
-              p={2}
-              sx={{
-                cursor: 'pointer',
-              }}
-              width='100%'
-            >
-              <Typography>
-                {battery.name}
-              </Typography>
-              <Stack>
-              {!!battery.cost && (
-                <Typography>
-                  {`$${battery.cost.toLocaleString()}`}
-                </Typography>
-              )}
-              <Typography
-                color='text.secondary'
-                fontSize={12}
-              >
-                  {battery.energy / 1000000} MWh
-                </Typography>
-                <Typography
-                  color='text.secondary'
-                  fontSize={12}
-                >
-                {getSizeString(battery)}
-                </Typography>
-              </Stack>
-            </Box>
-            <Stack
-              direction='row'
-              p={2}
-              spacing={2}
-            >
-              <IconButton onClick={onAdd(battery)}>
-                <Icon icon={faPlus} />
-              </IconButton>
-              <IconButton
-                disabled={!configuration?.items.some((item) => item === battery.id)}
-                onClick={onRemove(battery)}
-                sx={{
-                  '&.Mui-disabled svg': {
-                    color: 'grey.800'
-                  },
-                }}
-              >
-                <Icon icon={faMinus} />
-              </IconButton>
-            </Stack>
-          </ListItem>
+        {batteries.map((device) => device ? (
+          <ConfiguratorSelection
+            configuration={configuration}
+            count={count[device.id]}
+            device={device}
+            onAdd={onAdd}
+            onRemove={onRemove}
+          />
         ): null)}
+          <ConfiguratorSelection
+            count={configuration.totalTransformers}
+            device={transformer}
+            showControls={false}
+          >
+            <Tooltip
+              title='One transformer is needed for every two industrial batteries you order.'
+            >
+              <Icon
+                icon={faInfoCircle}
+                sx={{
+                  color: 'grey.500',
+                  fontSize: 14,
+                }}
+              />
+            </Tooltip>
+          </ConfiguratorSelection>
       </List>
     </Stack>
   );

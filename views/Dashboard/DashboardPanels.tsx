@@ -5,7 +5,6 @@ import {
   Box,
   Card,
   CardContent,
-  Container,
   Grid,
   Link,
   Stack,
@@ -20,13 +19,9 @@ export const metadata = {
   title: 'Dashboard',
 };
 
-export interface DashboardPanelsProps {
-  markdown: string;
-}
+export interface DashboardPanelsProps {}
 
-export const DashboardPanels = ({
-  markdown
-}: DashboardPanelsProps) => {
+export const DashboardPanels = () => {
   const [configurationCount, setConfigurationCount] = useState(0);
 
   useEffect(() => {
@@ -58,8 +53,8 @@ export const DashboardPanels = ({
       {metrics.map(({ count, displayName, icon }) => (
         <Grid
           item
-          md={4}
           key={displayName}
+          xl={4}
         >
           <Card elevation={0}>
             <CardContent
@@ -106,7 +101,7 @@ export const DashboardPanels = ({
           </Card>
         </Grid>
       ))}
-      <Grid item md={4}>
+      <Grid item xl={4}>
         <Link
           href='/configurator'
           sx={{
@@ -123,7 +118,7 @@ export const DashboardPanels = ({
               bgcolor: 'unset',
               border: '1px solid',
               borderColor:'divider',
-              pb: 2,
+              p: 1,
             }}
           >
             <CardContent
@@ -172,36 +167,6 @@ export const DashboardPanels = ({
           </Card>
         </Link>
       </Grid>
-      {markdown && (
-        <Grid
-          item
-          xs={12}
-        >
-          <Container maxWidth='md'>
-            <Box
-              bgcolor={({ palette }) => `${palette.background.paper}20`}
-              border='1px solid'
-              borderColor='divider'
-              color='text.primary'
-              px={2}
-              py={1}
-              sx={{
-                overflowY: 'auto',
-              }}
-            >
-              <MDXRemote
-                options={{
-                  mdxOptions: {
-                    // https://github.com/hashicorp/next-mdx-remote/issues/350#issuecomment-1461558918
-                    development: process.env.NODE_ENV === 'development',
-                  },
-                }}
-                source={markdown}
-              />
-            </Box>
-          </Container>
-        </Grid>
-      )}
     </Grid>
   );
 };

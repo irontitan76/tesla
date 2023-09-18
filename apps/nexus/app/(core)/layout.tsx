@@ -5,6 +5,7 @@ import {
   faBatteryBolt,
   faGaugeSimple,
   faIndustry,
+  faInfoCircle,
 } from '@fortawesome/sharp-light-svg-icons';
 import { Layout } from 'components/Layout';
 import { ReactNode } from 'react';
@@ -40,6 +41,13 @@ const items = [
     flag: true,
     href: '/devices',
     icon: faBatteryBolt,
+  },
+
+  {
+    children: 'About',
+    flag: true,
+    href: '/about',
+    icon: faInfoCircle,
   },
 ];
 

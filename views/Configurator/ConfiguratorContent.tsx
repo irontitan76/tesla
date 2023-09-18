@@ -1,13 +1,24 @@
 'use client';
 
-import { Grid, MenuItem, Stack, TextField, TextFieldProps, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { Configuration, Device } from 'database/objects';
+import {
+  Divider,
+  Grid,
+  MenuItem,
+  Stack,
+  TextField,
+  TextFieldProps,
+  Typography,
+  capitalize,
+} from '@mui/material';
+import { Configuration, Device, Transformer } from 'database/objects';
 import { supabase } from 'database/client';
+import { useEffect, useState } from 'react';
 import { ConfiguratorLayout } from './ConfiguratorLayout';
 import { ConfiguratorSelector } from './ConfiguratorSelector';
 import { ConfiguratorSummary } from './ConfiguratorSummary';
 import { calculateTotal } from './utils';
+
+export type ConfiguratorOrientation = 'horizontal' | 'vertical';
 
 export interface ConfiguratorContentProps {}
 
@@ -24,9 +35,13 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
     totalWidth: 0,
   };
 
+  const [orientation, setOrientation] = useState<ConfiguratorOrientation>('horizontal');
   const [batteries, setBatteries] = useState<Device[]>([]);
+  const [transformers, setTransformers] = useState<Transformer[]>([]);
   const [configurationId, setConfigurationId] = useState<string>('new');
   const [configurations, setConfigurations] = useState<Configuration[]>();
+
+  const isVertical = orientation === 'vertical';
 
   const fetchConfiguratorInformation = async () => {
     const { data: batteries } = await supabase
@@ -37,8 +52,14 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
       .from('configurations')
       .select();
 
+    const { data: transformers } = await supabase
+      .from('transformers')
+      .select()
+      .eq('id', 1);
+
     setBatteries(batteries || []);
     setConfigurations(configurations || []);
+    setTransformers(transformers || []);
   };
 
   const foundConfiguration = configurations?.find((config) => (
@@ -110,6 +131,10 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
     setConfigurationId(event.target.value);
   };
 
+  const handleOrientationChange: TextFieldProps['onChange'] = (event) => {
+    setOrientation(event.target.value as ConfiguratorOrientation);
+  };
+
   return (
     <Grid
       container
@@ -119,8 +144,11 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
       <Grid item xs={12}>
         <Stack
           alignItems='center'
+          borderBottom='1px solid'
+          borderColor='divider'
           direction='row'
           justifyContent='space-between'
+          pb={2}
         >
           <Typography
             component='h1'
@@ -129,65 +157,116 @@ export const ConfiguratorContent = ({}: ConfiguratorContentProps) => {
           >
             Configurator
           </Typography>
-          <TextField
-            InputProps={{
-              sx: {
-                minWidth: 200,
-              },
-            }}
-            label='Configuration ID'
-            onChange={handleConfigurationChange}
-            select
-            size='small'
-            value={configurationId ?? 'new'}
+          <Stack
+            direction='row'
+            spacing={2}
           >
-            <MenuItem
-              value='new'
+            <TextField
+              InputProps={{
+                sx: {
+                  minWidth: 200,
+                },
+              }}
+              label='Orientation'
+              onChange={handleOrientationChange}
+              select
+              size='small'
+              value={orientation}
             >
-              New
-            </MenuItem>
-            {configurations?.sort((a, b) => a.id - b.id).map((config) => (
+              {['horizontal', 'vertical'].map((orient) => (
+                <MenuItem
+                  key={orient}
+                  value={orient}
+                >
+                  {capitalize(orient)}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              InputProps={{
+                sx: {
+                  minWidth: 200,
+                },
+              }}
+              label='Configuration ID'
+              onChange={handleConfigurationChange}
+              select
+              size='small'
+              value={configurationId ?? 'new'}
+            >
               <MenuItem
-                key={config.id}
-                value={config.id}
+                value='new'
               >
-                {config.id}
+                New
               </MenuItem>
-            ))}
-          </TextField>
+              {configurations?.sort((a, b) => a.id - b.id).map((config) => (
+                <MenuItem
+                  key={config.id}
+                  value={config.id}
+                >
+                  {config.id}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Stack>
         </Stack>
       </Grid>
       <Grid
         item
-        md={5}
-        pr={4}
+        md={isVertical ? 6 : 12}
+        lg={isVertical ? 8 : 12}
+        xs={12}
+      >
+        <ConfiguratorLayout
+          batteries={batteries}
+          configuration={configuration}
+          orientation={orientation}
+          transformer={transformers[0]}
+        />
+      </Grid>
+      <Grid
+        item
+        py={2}
+        {...isVertical ? {
+          height: 'calc(100vh - 190px)',
+          md: 6,
+          sx: { overflowY: { lg: 'scroll' } },
+          lg: 4,
+          xs: 12,
+        } : {
+          md: 6,
+          lg: 6,
+          xs: 12,
+        }}
       >
         <ConfiguratorSelector
           batteries={batteries}
           onAdd={handleAddBattery}
           onRemove={handleRemoveBattery}
           configuration={configuration}
+          transformer={transformers[0]}
         />
+        {isVertical && (
+          <>
+            <Divider />
+            <ConfiguratorSummary
+              configuration={configuration}
+            />
+          </>
+        )}
       </Grid>
-      <Grid
-        container
-        flexDirection='column'
-        item
-        md={7}
-        spacing={4}
-      >
-        <Grid item>
+      {!isVertical && (
+        <Grid
+          item
+          lg={6}
+          xl={6}
+          xs={12}
+        >
           <ConfiguratorSummary
             configuration={configuration}
           />
         </Grid>
-        <Grid item>
-          <ConfiguratorLayout
-            batteries={batteries}
-            configuration={configuration}
-          />
-        </Grid>
-      </Grid>
+      )}
     </Grid>
   );
 };

@@ -2,11 +2,20 @@
 
 ## Overview
 
-In this project, I had the thrilling opportunity to develop a cutting-edge user interface for Tesla, where innovation met creativity at every juncture. This wasn't just about fulfilling the requirements; it was a joyful challenge that propelled me to weave in both ingenuity and flair to redefine user interaction.
-
-With a keen focus on excellence, I embarked on crafting an application that stands as a nexus of budget analysis, land dimension computation, and energy density assessment, aiming to elevate the customer engagement experience.
+I had some fun with this project! This wasn't just about fulfilling the requirements; it was a good old-fashioned challenge that propelled me to weave in both ingenuity and flair into a web experience.
 
 The following sections describe how to get started with this application as well as some design decisions that went into the making of this application.
+
+## Highlights
+
+1. **Themes**: light and dark can be toggled via the ThemeSelector component found in the User Menu for protected routes or at the bottom of unprotected routes.
+2. **About View**: This renders this README.md to the screen using MDX.
+3. **Devices View**: This makes a request to Supabase for all devices (batteries and transformers) and renders them into a virtualized list.
+4. **Configurations View**: This makes a request to Supabase for all configurations, or layouts, and renders them into a virtualized list.
+5. **Configurator View**: The core aspect of this evaluation and renders a battery selector panel, summary pane, and layout generator.
+6. **SignIn View**: A view consisting of an email and password login form that pushes the route to Industrial Design platform once entered and confirmed.
+7. **SignUp View**: A view consisting of an email, password, and confirm password that pushes the route to Industrial Design platform once the user is successfully created.
+8. **NotFound View**: Check out a NotFound view that contains a cool visualization, e.g., [https://tesla.rosssheppard.com/nonexistent](https://tesla.rosssheppard.com/nonexistent).
 
 ## Quickstart
 
@@ -31,6 +40,9 @@ Find out below how to get started in a local development environment as well as 
 1. The specification stated "Assume that for every 2 industrial batteries bought 1 transformer is needed." 
    - **Clarification**: Is a transformer required even when a single battery is purchased?
    - **Interpretation**: A transformer is added for a single battery and subsequently for every multiple of two batteries.
+2. Again, the specification stated "Assume that for every 2 industrial batteries bought 1 transformer is needed."
+   - **Clarification**: Can the user add transformers directly?
+   - **Interpretation**: I assumed that transformers were tied to the number of batteries alone, so transformers can only be added through the addition of batteries.
 
 ## Library Selection
 

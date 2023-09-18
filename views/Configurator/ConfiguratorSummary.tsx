@@ -1,6 +1,4 @@
-import { faInfoCircle } from '@fortawesome/sharp-light-svg-icons';
-import { List, ListItem, Stack, Tooltip, Typography } from '@mui/material';
-import { Icon } from 'components/Icon';
+import { List, ListItem, Stack, Typography } from '@mui/material';
 import { Heading } from 'components/Heading';
 import { Configuration } from 'database/objects';
 
@@ -18,10 +16,10 @@ export const ConfiguratorSummary = ({
   const listItemStyles = {
     display: 'flex',
     justifyContent: 'space-between',
+    py: 0.5,
   };
 
   const {
-    totalBatteries,
     totalCost,
     totalDepth,
     totalEnergy,
@@ -30,45 +28,32 @@ export const ConfiguratorSummary = ({
   } = configuration;
 
   return (
-    <Stack
-      borderRadius={2}
-      p={2}
-    >
-      <Heading>Overview</Heading>
+    <Stack py={2}>
+      <Heading mb={0}>
+        Summary
+      </Heading>
       <List>
         <ListItem sx={listItemStyles}>
           <Typography>Cost</Typography>
-          <Typography>{`$${totalCost.toLocaleString()}`}</Typography>
-        </ListItem>
-        <ListItem sx={listItemStyles}>
-          <Typography>Energy</Typography>
-          <Typography>{totalEnergy / 1000000} MWh</Typography>
-        </ListItem>
-        <ListItem sx={listItemStyles}>
-          <Typography>Dimensions</Typography>
-          <Typography>{`${totalWidth}ft x ${totalDepth}ft`}</Typography>
+          <Typography>
+            {`$${totalCost.toLocaleString()}`}
+          </Typography>
         </ListItem>
         <ListItem sx={listItemStyles}>
           <Typography>
-            Transformers
-            <Tooltip
-              title='One transformer is needed for every two industrial batteries you order.'
-            >
-              <Icon
-                icon={faInfoCircle}
-                sx={{
-                  color: 'grey.500',
-                  fontSize: 14,
-                  ml: 1,
-                }}
-              />
-            </Tooltip>
+            Energy
           </Typography>
-          <Typography>{totalTransformers}</Typography>
+          <Typography>
+            {totalEnergy / 1000000} MWh
+          </Typography>
         </ListItem>
         <ListItem sx={listItemStyles}>
-          <Typography>Batteries</Typography>
-          <Typography>{totalBatteries}</Typography>
+          <Typography>
+            Dimensions
+          </Typography>
+          <Typography>
+            {`${totalWidth}ft x ${totalDepth}ft`}
+          </Typography>
         </ListItem>
       </List>
     </Stack>

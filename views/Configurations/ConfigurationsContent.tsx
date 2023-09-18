@@ -6,7 +6,7 @@ import { supabase } from 'database/client';
 import { useEffect, useState } from 'react';
 import { Grid, ListItem } from '@mui/material';
 import { Icon } from 'components/Icon';
-import { faBattery } from '@fortawesome/sharp-light-svg-icons';
+import { faBattery, faBatterySlash } from '@fortawesome/sharp-light-svg-icons';
 
 export interface ConfigurationsContentProps {}
 
@@ -106,6 +106,18 @@ export const ConfigurationsContent = ({}: ConfigurationsContentProps) => {
                   </ListItem>
                 );
               })}
+              {!row.items.length && (
+                <ListItem
+                  sx={{
+                    alignItems: 'center',
+                    display: 'flex',
+                    gap: 2,
+                  }}
+                >
+                  <Icon icon={faBatterySlash} />
+                  No devices are in this configuration
+                </ListItem>
+              )}
             </Grid>
           </Grid>
         );
