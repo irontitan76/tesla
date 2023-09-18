@@ -101,6 +101,7 @@ export const ConfiguratorLayout = ({
           sx={{
             borderTopLeftRadius: 3,
             borderTopRightRadius: 3,
+            overflowY: 'scroll',
           }}
           width='100%'
         >
