@@ -1,31 +1,44 @@
 {
-  "name": "nexus",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/nexus",
+  "name": "nexus",
   "projectType": "application",
+  "sourceRoot": "apps/nexus",
+  "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/next:build",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
-      "options": {
-        "outputPath": "dist/apps/nexus"
-      },
       "configurations": {
         "development": {
           "outputPath": "apps/nexus"
         },
         "production": {}
+      },
+      "defaultConfiguration": "production",
+      "executor": "@nx/next:build",
+      "options": {
+        "outputPath": "dist/apps/nexus"
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "nexus:build:production"
       }
     },
-    "serve": {
-      "executor": "@nx/next:server",
-      "defaultConfiguration": "development",
+    "lint": {
+      "executor": "@nx/linter:eslint",
       "options": {
-        "buildTarget": "nexus:build",
-        "dev": true,
-        "port": 8000
+        "lintFilePatterns": [
+          "apps/nexus/**/*.{ts,tsx,js,jsx}"
+        ]
       },
+      "outputs": [
+        "{options.outputFile}"
+      ]
+    },
+    "serve": {
       "configurations": {
         "development": {
           "buildTarget": "nexus:build:development",
@@ -35,35 +48,30 @@
           "buildTarget": "nexus:build:production",
           "dev": false
         }
-      }
-    },
-    "export": {
-      "executor": "@nx/next:export",
+      },
+      "defaultConfiguration": "development",
+      "executor": "@nx/next:server",
       "options": {
-        "buildTarget": "nexus:build:production"
+        "buildTarget": "nexus:build",
+        "dev": true,
+        "port": 8000
       }
     },
     "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/nexus/jest.config.ts",
-        "passWithNoTests": true
-      },
       "configurations": {
         "ci": {
           "ci": true,
           "codeCoverage": true
         }
-      }
-    },
-    "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      },
+      "executor": "@nx/jest:jest",
       "options": {
-        "lintFilePatterns": ["apps/nexus/**/*.{ts,tsx,js,jsx}"]
-      }
+        "jestConfig": "apps/nexus/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ]
     }
-  },
-  "tags": []
+  }
 }

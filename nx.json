@@ -1,39 +1,23 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx-cloud",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "accessToken": "ZjY3M2E1YzAtNWJmNy00NjQ5LTg0YTYtM2U1ODNjYTFmYWNifHJlYWQtd3JpdGU="
+  "generators": {
+    "@nx/next": {
+      "application": {
+        "linter": "eslint",
+        "style": "css"
+      }
+    },
+    "@nx/react": {
+      "application": {
+        "babel": true
       }
     }
   },
-  "workspaceLayout": {
-    "projectNameAndRootFormat": "as-provided"
-  },
-  "targetDefaults": {
-    "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
-    },
-    "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
-    },
-    "e2e": {
-      "inputs": ["default", "^production"]
-    },
-    "lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.eslintignore",
-        "{workspaceRoot}/eslint.config.js"
-      ]
-    }
-  },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -46,17 +30,53 @@
     ],
     "sharedGlobals": []
   },
-  "generators": {
-    "@nx/react": {
-      "application": {
-        "babel": true
-      }
+  "targetDefaults": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
     },
-    "@nx/next": {
-      "application": {
-        "style": "css",
-        "linter": "eslint"
-      }
+    "e2e": {
+      "inputs": [
+        "default",
+        "^production"
+      ]
+    },
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore",
+        "{workspaceRoot}/eslint.config.js"
+      ]
+    },
+    "test": {
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/jest.preset.js"
+      ]
     }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "options": {
+        "accessToken": "ZjY3M2E1YzAtNWJmNy00NjQ5LTg0YTYtM2U1ODNjYTFmYWNifHJlYWQtd3JpdGU=",
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ]
+      },
+      "runner": "nx-cloud"
+    }
+  },
+  "workspaceLayout": {
+    "projectNameAndRootFormat": "as-provided"
   }
 }

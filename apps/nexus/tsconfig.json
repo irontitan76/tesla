@@ -16,9 +16,17 @@
     ],
     "resolveJsonModule": true,
     "strict": true,
-    "types": ["jest", "node"]
+    "types": [
+      "jest",
+      "node"
+    ]
   },
-  "exclude": ["node_modules", "jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
+  "exclude": [
+    "node_modules",
+    "jest.config.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts"
+  ],
   "extends": "../../tsconfig.base.json",
   "include": [
     "**/*.ts",

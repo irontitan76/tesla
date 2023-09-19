@@ -1,22 +1,30 @@
 {
-  "name": "nexus-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "nexus"
+  ],
+  "name": "nexus-e2e",
   "sourceRoot": "apps/nexus-e2e/src",
   "targets": {
     "e2e": {
       "executor": "@nx/playwright:playwright",
-      "outputs": ["{workspaceRoot}/dist/.playwright/apps/nexus-e2e"],
       "options": {
         "config": "apps/nexus-e2e/playwright.config.ts"
-      }
+      },
+      "outputs": [
+        "{workspaceRoot}/dist/.playwright/apps/nexus-e2e"
+      ]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/nexus-e2e/**/*.{js,ts}"]
-      }
+        "lintFilePatterns": [
+          "apps/nexus-e2e/**/*.{js,ts}"
+        ]
+      },
+      "outputs": [
+        "{options.outputFile}"
+      ]
     }
-  },
-  "implicitDependencies": ["nexus"]
+  }
 }

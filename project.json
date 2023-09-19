@@ -1,0 +1,7 @@
+{
+  "targets": {
+    "format:json": {
+      "command": "node ./tools/orderJSON.js"
+    }
+  }
+}
