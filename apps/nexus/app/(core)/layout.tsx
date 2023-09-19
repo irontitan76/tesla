@@ -5,7 +5,7 @@ import {
   faIndustry,
   faInfoCircle,
 } from '@fortawesome/sharp-light-svg-icons';
-import { Layout } from 'components/Layout';
+import { Layout } from '@nexus/components';
 import { ReactNode } from 'react';
 
 export const metadata = {

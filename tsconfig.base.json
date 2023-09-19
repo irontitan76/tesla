@@ -6,21 +6,25 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "module": "esnext",
     "moduleResolution": "node",
-    "paths": {},
+    "paths": {
+      "@nexus/components": ["components/src/index.ts"],
+      "@nexus/configs/*": ["configs/src/*"],
+      "@nexus/fonts/*": ["fonts/src/*"],
+      "@nexus/logos/*": ["logos/src/*"],
+      "@nexus/themes": ["themes/src/index.ts"],
+      "@nexus/utils": ["utils/src/index.ts"],
+      "@nexus/utils/supabase": ["utils/src/supabase/index.ts"],
+      "@nexus/utils/supabase/*": ["utils/src/supabase/*.ts"],
+      "@nexus/views": ["views/src/index.ts"]
+    },
     "rootDir": ".",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "target": "es2015"
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

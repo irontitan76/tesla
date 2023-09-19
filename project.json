@@ -1,7 +1,15 @@
 {
   "targets": {
     "format:json": {
-      "command": "node ./tools/orderJSON.js"
+      "command": "node ./scripts/sortPackageJSON.js"
+    },
+    "local-registry": {
+      "executor": "@nx/js:verdaccio",
+      "options": {
+        "port": 4873,
+        "config": ".verdaccio/config.yml",
+        "storage": "tmp/local-registry/storage"
+      }
     }
   }
 }

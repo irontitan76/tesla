@@ -1,1 +1,1 @@
-export { Configurations as default, metadata } from 'views/Configurations';
+export { Configurations as default, configurationsMetadata as metadata } from '@nexus/views';

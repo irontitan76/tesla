@@ -1,1 +1,1 @@
-export { Loading as default } from 'views/Loading';
+export { Loading as default } from '@nexus/views';

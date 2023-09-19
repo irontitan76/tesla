@@ -1,0 +1,72 @@
+{
+  "name": "@nexus/views",
+  "version": "0.0.1",
+  "babel": {
+    "plugins": [],
+    "presets": [
+      [
+        "@nx/react/babel",
+        {
+          "runtime": "automatic",
+          "useBuiltIns": "usage"
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:@nx/react",
+      "../.eslintrc.json"
+    ],
+    "ignorePatterns": [
+      "!**/*"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "*.ts",
+          "*.tsx",
+          "*.js",
+          "*.jsx"
+        ],
+        "rules": {}
+      },
+      {
+        "files": [
+          "*.ts",
+          "*.tsx"
+        ],
+        "rules": {}
+      },
+      {
+        "files": [
+          "*.js",
+          "*.jsx"
+        ],
+        "rules": {}
+      }
+    ]
+  },
+  "jest": {
+    "coverageDirectory": "../coverage/components",
+    "displayName": "components",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "preset": "../jest.preset.js",
+    "transform": {
+      "^.+\\.[tj]sx?$": [
+        "babel-jest",
+        {
+          "presets": [
+            "@nx/react/babel"
+          ]
+        }
+      ],
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "@nx/react/plugins/jest"
+    }
+  }
+}

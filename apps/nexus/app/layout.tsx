@@ -1,4 +1,4 @@
-import { LayoutRoot } from 'components/Layout';
+import { LayoutRoot } from '@nexus/components';
 import { ReactNode } from 'react';
 
 export const metadata = {

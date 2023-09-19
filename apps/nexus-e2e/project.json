@@ -1,9 +1,9 @@
 {
+  "name": "nexus-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": [
     "nexus"
   ],
-  "name": "nexus-e2e",
   "sourceRoot": "apps/nexus-e2e/src",
   "targets": {
     "e2e": {
