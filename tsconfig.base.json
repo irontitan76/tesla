@@ -11,13 +11,13 @@
     "moduleResolution": "node",
     "paths": {
       "@nexus/components": ["components/src/index.ts"],
-      "@nexus/configs/*": ["configs/src/*"],
+      "@nexus/configs": ["configs/src/index.ts"],
       "@nexus/fonts/*": ["fonts/src/*"],
       "@nexus/logos/*": ["logos/src/*"],
       "@nexus/themes": ["themes/src/index.ts"],
       "@nexus/utils": ["utils/src/index.ts"],
       "@nexus/utils/supabase": ["utils/src/supabase/index.ts"],
-      "@nexus/utils/supabase/*": ["utils/src/supabase/*.ts"],
+      "@nexus/utils/supabase/serverClient": ["utils/src/supabase/serverClient.ts"],
       "@nexus/views": ["views/src/index.ts"]
     },
     "rootDir": ".",

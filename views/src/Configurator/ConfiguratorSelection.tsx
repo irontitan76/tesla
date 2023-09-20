@@ -1,7 +1,8 @@
 import { faMinus, faPlus } from '@fortawesome/sharp-light-svg-icons';
 import { Box, IconButton, IconButtonProps, ListItem, Stack, Typography } from '@mui/material';
 import { Icon } from '@nexus/components';
-import { Configuration, Device, getSizeString } from '@nexus/utils';
+import { Configuration, Device } from '@nexus/utils/supabase';
+import { getSizeString } from '@nexus/utils';
 import { ReactNode } from 'react';
 
 export interface ConfiguratorSelectionProps {

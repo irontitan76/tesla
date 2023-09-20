@@ -1,14 +1,12 @@
 'use client';
 
-import { supabase } from '@nexus/utils/supabase';
 import { useRouter } from 'next/navigation';
-import { AuthField, AuthForm, AuthFormType } from '../AuthForm';
+import { AuthField, AuthForm, AuthFormProps } from '../AuthForm';
 import { TextFieldProps } from '@mui/material';
 
+export interface SignInFormProps extends Omit<AuthFormProps, 'fields'> {}
 
-export const SignInForm = () => {
-  const router = useRouter();
-
+export const SignInForm = (props: SignInFormProps) => {
   const fields: AuthField<TextFieldProps>[] = [
     {
       placeholder: 'Email Address',
@@ -24,32 +22,12 @@ export const SignInForm = () => {
     },
   ];
 
-  const handleSubmit = async (form: AuthFormType) => {
-    return supabase.auth.signInWithPassword({
-      email: form.email,
-      password: form.password,
-    });
-  };
-
-  const handleSuccess = async () => {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (session) {
-      router.refresh();
-    }
-  };
-
   return (
     <AuthForm<TextFieldProps>
       fields={fields}
       linkText='Or Sign Up'
-      linkHref='/auth/signup'
-      onSuccess={handleSuccess}
-      onSubmit={handleSubmit}
-      pushTo='/'
       submitText='Sign In'
+      {...props}
     />
   );
 };

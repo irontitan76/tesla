@@ -65,6 +65,9 @@ dependencies:
   '@supabase/supabase-js':
     specifier: ^2.33.2
     version: 2.34.0
+  '@svgr/rollup':
+    specifier: ^8.1.0
+    version: 8.1.0(typescript@5.1.6)
   '@swc/helpers':
     specifier: ~0.5.0
     version: 0.5.2
@@ -3566,7 +3569,6 @@ packages:
       '@types/estree': 1.0.1
       estree-walker: 2.0.2
       picomatch: 2.3.1
-    dev: true
 
   /@rushstack/eslint-patch@1.4.0:
     resolution: {integrity: sha512-cEjvTPU32OM9lUFegJagO0mRnIn+rbqrG89vV8/xLnLFX0DoR0r1oy5IlTga71Q7uT3Qus7qm7wgeiMT/+Irlg==}
@@ -3823,6 +3825,25 @@ packages:
       svgo: 3.0.2
     transitivePeerDependencies:
       - typescript
+
+  /@svgr/rollup@8.1.0(typescript@5.1.6):
+    resolution: {integrity: sha512-0XR1poYvPQoPpmfDYLEqUGu5ePAQ4pdgN3VFsZBNAeze7qubVpsIY1o1R6PZpKep/DKu33GSm2NhwpCLkMs2Cw==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@babel/core': 7.22.20
+      '@babel/plugin-transform-react-constant-elements': 7.22.5(@babel/core@7.22.20)
+      '@babel/preset-env': 7.22.20(@babel/core@7.22.20)
+      '@babel/preset-react': 7.22.15(@babel/core@7.22.20)
+      '@babel/preset-typescript': 7.22.15(@babel/core@7.22.20)
+      '@rollup/pluginutils': 5.0.4
+      '@svgr/core': 8.1.0(typescript@5.1.6)
+      '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0)
+      '@svgr/plugin-svgo': 8.1.0(@svgr/core@8.1.0)(typescript@5.1.6)
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+      - typescript
+    dev: false
 
   /@svgr/webpack@8.1.0(typescript@5.1.6):
     resolution: {integrity: sha512-LnhVjMWyMQV9ZmeEy26maJk+8HTIbd59cH4F2MJ439k9DqejRisfFNGAPvRYlKETuh9LrImlS8aKsBgKjMA8WA==}
@@ -7051,7 +7072,6 @@ packages:
 
   /estree-walker@2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
-    dev: true
 
   /estree-walker@3.0.3:
     resolution: {integrity: sha512-7RUKfXgSMMkzt6ZuXmqapOurLGPPfgj6l9uRZ7lRGolvk0y2yocc35LdcxKC5PQZdn2DMqioAQ2NoWcrTKmm6g==}

@@ -2,7 +2,7 @@
 
 import { IconButtonProps, List, Stack, Tooltip, Typography } from '@mui/material';
 import { Heading, Icon } from '@nexus/components';
-import { Device, Configuration, Transformer } from '@nexus/utils';
+import { Device, Configuration, Transformer } from '@nexus/utils/supabase';
 import { ConfiguratorSelection } from './ConfiguratorSelection';
 import { faInfoCircle } from '@fortawesome/sharp-light-svg-icons';
 

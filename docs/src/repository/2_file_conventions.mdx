@@ -1,0 +1,24 @@
+---
+author: Ross Sheppard
+last_modified: 2023-09-19
+next: null
+title: Repository Structure
+---
+# File Conventions
+
+## File Naming
+
+Unless specified otherwise below, all files should follow a lowerCamelCase convention.
+
+| Type                         | Convention     |
+| ---------------------------- | -------------- |
+| Base JavaScript & TypeScript | lowerCamelCase |
+| React Components             | UpperCamelCase |
+| Markdown (excluding README)  | snake_case     |
+| Font Files                   | snake_case     |
+| Media Files                  | snake_case     |
+
+## File Extensions
+
+If a file consumes JSX, then use the `.tsx` extension. If it's a pure TypeScript file without JSX then use `.ts`. `.js` files should only
+be used for repository scripts located in the `scripts` folder.

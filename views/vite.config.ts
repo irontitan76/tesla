@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import dts from 'vite-plugin-dts';
 import * as path from 'path';
+import svgr from '@svgr/rollup';
 
 export default defineConfig({
   cacheDir: '../node_modules/.vite/views',
@@ -16,6 +17,7 @@ export default defineConfig({
     }),
     react(),
     nxViteTsPaths(),
+    svgr(),
   ],
 
   // Uncomment this if you are using workers.

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { createServerSupabaseClient } from '@nexus/utils/supabase/serverClient';
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import { Markdown } from '@nexus/components';
 import { redirect } from 'next/navigation';
 
 export const aboutMetadata = {
@@ -23,14 +23,12 @@ export const About = async () => {
   return (
     <Box
       color='text.primary'
-      // Issue: https://github.com/pmndrs/drei/issues/823
       component='div'
       display='flex'
       justifyContent='center'
       width='100%'
     >
       <Box
-      // Issue: https://github.com/pmndrs/drei/issues/823
         component='div'
         maxWidth={700}
         px={2}
@@ -39,15 +37,7 @@ export const About = async () => {
           overflowY: 'auto',
         }}
       >
-        <MDXRemote
-          options={{
-            mdxOptions: {
-              // https://github.com/hashicorp/next-mdx-remote/issues/350#issuecomment-1461558918
-              development: process.env.NODE_ENV === 'development',
-            },
-          }}
-          source={markdown}
-        />
+        <Markdown source={markdown} />
       </Box>
     </Box>
   );

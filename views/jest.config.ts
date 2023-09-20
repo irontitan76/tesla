@@ -1,11 +1,11 @@
 /* eslint-disable */
 export default {
-  displayName: 'nexus',
-  preset: '../../jest.preset.js',
+  displayName: 'components2',
+  preset: '../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
-    '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/next/babel'] }],
+    '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/react/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/apps/nexus',
+  coverageDirectory: '../coverage/components2',
 };

@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import dts from 'vite-plugin-dts';
+import svgr from '@svgr/rollup';
 import * as path from 'path';
 
 export default defineConfig({
@@ -16,6 +17,7 @@ export default defineConfig({
     }),
     react(),
     nxViteTsPaths(),
+    svgr(),
   ],
 
   // Uncomment this if you are using workers.

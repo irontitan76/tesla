@@ -12,41 +12,27 @@ import {
   ToolbarProps,
   Typography,
 } from '@mui/material';
-import { supabase } from '@nexus/utils/supabase';
-import { User } from '@supabase/supabase-js';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Avatar } from '../Avatar';
+import { Avatar, AvatarProps } from '../Avatar';
 import { Icon } from '../Icon';
 import { Logo } from '../Logo';
 
-export interface LayoutTopProps extends AppBarProps {
+export interface LayoutTopProps<T> extends AppBarProps {
+  onSignOut?: AvatarProps['onSignOut'];
   LogoProps?: SVGElement;
   StackProps?: StackProps;
   ToolbarProps?: ToolbarProps;
+  user?: AvatarProps<T>['user'];
 }
 
-export const LayoutTop = ({ LogoProps, StackProps, ToolbarProps, sx, ...rest }: LayoutTopProps) => {
-  const router = useRouter();
-  const [user, setUser] = useState<User>();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const { data } = await supabase.auth.getUser();
-
-      if (data?.user) {
-        setUser(data.user);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    router.refresh();
-  };
-
+export const LayoutTop = <T,>({
+  onSignOut,
+  LogoProps,
+  StackProps,
+  ToolbarProps,
+  sx,
+  user,
+  ...rest
+}: LayoutTopProps<T>) => {
   return (
     <AppBar
       elevation={0}
@@ -113,7 +99,7 @@ export const LayoutTop = ({ LogoProps, StackProps, ToolbarProps, sx, ...rest }: 
                 <Icon icon={faGithub} />
               </IconButton>
               <Avatar
-                onSignOut={handleSignOut}
+                onSignOut={onSignOut}
                 user={user}
               />
             </Stack>

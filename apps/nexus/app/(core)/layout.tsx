@@ -1,3 +1,5 @@
+'use client';
+
 import {
   faArrowProgress,
   faBatteryBolt,
@@ -5,15 +7,11 @@ import {
   faIndustry,
   faInfoCircle,
 } from '@fortawesome/sharp-light-svg-icons';
+import { supabase } from '@nexus/utils/supabase';
 import { Layout } from '@nexus/components';
-import { ReactNode } from 'react';
-
-export const metadata = {
-  title: {
-    default: 'Tesla',
-    template: '%s — Tesla',
-  },
-};
+import { useRouter } from 'next/navigation';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { User } from '@supabase/supabase-js';
 
 const items = [
   {
@@ -49,6 +47,38 @@ const items = [
   },
 ];
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  return <Layout side={{ items: items }}>{children}</Layout>;
+export interface CoreLayoutProps {
+  children: ReactNode;
+}
+
+export default function CoreLayout({ children }: CoreLayoutProps) {
+  const [user, setUser] = useState<User>();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.refresh();
+  };
+
+  const getUser = useCallback(async () => {
+    const { data } = await supabase.auth.getUser();
+
+    if (!!data?.user) {
+      setUser(data.user);
+    }
+  }, []);
+
+  useEffect(() => {
+    getUser();
+  }, [getUser]);
+
+  return (
+    <Layout<User>
+      onSignOut={handleSignOut}
+      side={{ items: items }}
+      user={user}
+    >
+      {children}
+    </Layout>
+  );
 }

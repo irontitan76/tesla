@@ -1,10 +1,14 @@
 'use client';
 
 import { Box, Grid } from '@mui/material';
-import { SignUpForm, ThemeSelector } from '@nexus/components';
+import { SignUpForm, SignUpFormProps, ThemeSelector } from '@nexus/components';
+import { supabase } from '@nexus/utils/supabase';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 
 export const SignUpContents = () => {
+  const router = useRouter();
+
   const startVanta = useCallback(() => {
     try {
       if (window.VANTA) {
@@ -31,6 +35,32 @@ export const SignUpContents = () => {
 
   useEffect(() => startVanta(), [startVanta]);
 
+  const handleSubmit: SignUpFormProps['onSubmit'] = async (form) => {
+    return supabase.auth.signUp({
+      email: form.email,
+      password: form.password,
+    });
+  };
+
+  const handleSuccess: SignUpFormProps['onSuccess'] = async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (session) {
+      router.refresh();
+    }
+  };
+
+  const handleValidate: SignUpFormProps['onValidate'] = ({ addError, form }) => {
+    if (form.password !== form.confirmPassword) {
+      addError('Passwords do not match.');
+      return false;
+    }
+
+    return true;
+  };
+
   return (
     <Grid
       alignItems='center'
@@ -43,7 +73,13 @@ export const SignUpContents = () => {
     >
       <Grid item />
       <Grid item>
-        <SignUpForm />
+        <SignUpForm
+          linkHref='/auth/signin'
+          onSubmit={handleSubmit}
+          onSuccess={handleSuccess}
+          onValidate={handleValidate}
+          pushTo='/'
+        />
       </Grid>
       <Grid item>
         <Box

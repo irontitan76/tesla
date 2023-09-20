@@ -1,7 +1,10 @@
 {
   "targets": {
-    "format:json": {
-      "command": "node ./scripts/sortPackageJSON.js"
+    "format:imports": {
+      "command": "node ./scripts/formatImports.js"
+    },
+    "format:manifests": {
+      "command": "node ./scripts/formatManifests.js"
     },
     "local-registry": {
       "executor": "@nx/js:verdaccio",

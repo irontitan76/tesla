@@ -1,7 +1,9 @@
 'use client';
 
 import { Box, Grid } from '@mui/material';
-import { SignInForm, ThemeSelector } from '@nexus/components';
+import { AuthFormType, SignInForm, ThemeSelector } from '@nexus/components';
+import { supabase } from '@nexus/utils/supabase';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 
 type VantaFn = (options: Record<string, string | boolean | number >) => void;
@@ -17,6 +19,8 @@ declare global {
 }
 
 export const SignInContents = () => {
+  const router = useRouter();
+
   const startVanta = useCallback(() => {
     try {
       if (window.VANTA) {
@@ -43,6 +47,23 @@ export const SignInContents = () => {
 
   useEffect(() => startVanta(), [startVanta]);
 
+  const handleSubmit = async (form: AuthFormType) => {
+    return supabase.auth.signInWithPassword({
+      email: form.email,
+      password: form.password,
+    });
+  };
+
+  const handleSuccess = async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (session) {
+      router.refresh();
+    }
+  };
+
   return (
     <Grid
       alignItems='center'
@@ -55,7 +76,12 @@ export const SignInContents = () => {
     >
       <Grid item />
       <Grid item>
-        <SignInForm />
+        <SignInForm
+          linkHref='/auth/signup'
+          onSubmit={handleSubmit}
+          onSuccess={handleSuccess}
+          pushTo='/'
+        />
       </Grid>
       <Grid item>
         <Box

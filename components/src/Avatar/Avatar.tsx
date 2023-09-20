@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  IconDefinition,
   faArrowRightFromBracket,
   faMoon,
   faSun,
@@ -12,6 +13,7 @@ import {
   Divider,
   Grow,
   Link,
+  LinkProps,
   List,
   ListItemIcon,
   MenuItem,
@@ -22,7 +24,6 @@ import {
   Popper,
   Typography,
 } from '@mui/material';
-import { User } from '@supabase/supabase-js';
 import { MouseEvent, useState } from 'react';
 import { Icon } from '../Icon';
 import { useColorMode } from '../ThemeRegistry';
@@ -59,31 +60,41 @@ const getGreetingByTimezone = () => {
   return greeting;
 };
 
-export interface AvatarProps extends MuiAvatarProps {
-  onSignOut?: MenuItemProps['onClick'];
-  user?: User;
+export interface AvatarMenuItem {
+  displayName: string;
+  href: LinkProps['href'] | null;
+  icon: IconDefinition;
+  onClick: MenuItemProps['onClick'];
 }
 
-export const Avatar = ({ children, onSignOut, user, ...rest }: AvatarProps) => {
+export interface AvatarProps<T = { email: string }> extends MuiAvatarProps {
+  onSignOut?: MenuItemProps['onClick'];
+  user?: (T & { email?: string });
+}
+
+export const Avatar = <T,>({ children, onSignOut, user, ...rest }: AvatarProps<T>) => {
   const { mode, toggleColorMode } = useColorMode();
   const isDark = mode === 'dark';
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 
-  const userMenu = [
+  const userMenu: AvatarMenuItem[] = [
     {
       displayName: `${isDark ? 'Light' : 'Dark'} mode`,
       href: null,
       icon: isDark ? faSun : faMoon,
       onClick: toggleColorMode,
     },
-    {
+  ];
+
+  if (!!onSignOut) {
+    userMenu.push({
       displayName: 'Sign out',
       href: '/auth/signin',
       icon: faArrowRightFromBracket,
       onClick: onSignOut,
-    },
-  ];
+    });
+  }
 
   const handleAvatarClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -106,6 +117,7 @@ export const Avatar = ({ children, onSignOut, user, ...rest }: AvatarProps) => {
       }}
     >
       <MuiAvatar
+        alt={user?.email}
         onClick={anchorEl ? handleClose : handleAvatarClick}
         sx={{
           cursor: 'pointer',
@@ -114,13 +126,15 @@ export const Avatar = ({ children, onSignOut, user, ...rest }: AvatarProps) => {
         }}
         {...rest}
       >
-        <Icon
-          icon={faUser}
-          sx={{
-            fill: ({ palette }) => palette.background.paper,
-            fontSize: 14,
-          }}
-        />
+        {user?.email?.[0].toUpperCase() || (
+          <Icon
+            icon={faUser}
+            sx={{
+              fill: ({ palette }) => palette.background.paper,
+              fontSize: 14,
+            }}
+          />
+        )}
       </MuiAvatar>
       <Popper
         anchorEl={anchorEl}

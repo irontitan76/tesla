@@ -1,6 +1,6 @@
 import { List, ListItem, Stack, Typography } from '@mui/material';
 import { Heading } from '@nexus/components';
-import { Configuration } from '@nexus/utils';
+import { Configuration } from '@nexus/utils/supabase';
 
 export interface ConfiguratorSummaryProps {
   configuration?: Configuration;
