@@ -2,8 +2,12 @@
   "cSpell.words": [
     "fontawesome",
     "fortawesome",
+    "maxage",
+    "npmjs",
+    "preinstall",
     "supabase",
-    "VANTA"
+    "unpublish",
+    "vanta"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.validate": ["json"]

@@ -1,7 +1,9 @@
 {
   "name": "@nexus/source",
   "version": "0.0.0",
-  "scripts": {},
+  "scripts": {
+    "prepare": "node ./scripts/loadEnvironment.js"
+  },
   "dependencies": {
     "@babel/parser": "^7.22.16",
     "@emotion/cache": "^11.11.0",
@@ -29,6 +31,7 @@
     "@types/mdx": "^2.0.7",
     "copyfiles": "^2.4.1",
     "dayjs": "^1.11.9",
+    "dotenv": "^16.3.1",
     "install": "^0.13.0",
     "lodash": "^4.17.21",
     "next": "13.4.1",

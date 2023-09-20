@@ -6,6 +6,9 @@
     "format:json": {
       "command": "node ./scripts/formatJSON.js"
     },
+    "install": {
+      "command": "pnpm install"
+    },
     "local-registry": {
       "executor": "@nx/js:verdaccio",
       "options": {

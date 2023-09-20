@@ -1,11 +1,14 @@
 const { sync: globSync } = require('glob');
 const { readFile, writeFile } = require('fs').promises;
+
 const readFromFile = async (filePath) => {
   return readFile(filePath, 'utf-8');
 };
+
 const writeToFile = async (filePath, data) => {
   await writeFile(filePath, data, 'utf-8');
 };
+
 const parser = require('@babel/parser');
 const sortImports = (code) => {
   const ast = parser.parse(code, {
