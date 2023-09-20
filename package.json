@@ -1,7 +1,9 @@
 {
   "name": "@nexus/source",
   "version": "0.0.0",
+  "scripts": {},
   "dependencies": {
+    "@babel/parser": "^7.22.16",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/sheet": "^1.2.2",
@@ -96,6 +98,5 @@
     "vitest": "~0.32.0"
   },
   "license": "MIT",
-  "private": true,
-  "scripts": {}
+  "private": true
 }

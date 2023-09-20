@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@babel/parser':
+    specifier: ^7.22.16
+    version: 7.22.16
   '@emotion/cache':
     specifier: ^11.11.0
     version: 11.11.0
